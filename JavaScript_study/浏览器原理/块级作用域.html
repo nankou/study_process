@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>块级作用域</title>
+</head>
+
+<body>
+    <h5>全局作用域--全局作用域中的对象在代码中的任何地方都能访问，其生命周期伴随着页面的生命周期。</h5>
+    <h5>函数作用域--函数作用域就是在函数内部定义的变量或者函数，并且定义的变量或者函数只能在函数内部被访问。函数执行结束之后，函数内部定义的变量会被销毁。</h5>
+    <h5>块级作用域--块级作用域就是使用一对大括号包裹的一段代码，比如函数、判断语句、循环语句，甚至单独的一个{}都可以被看作是一个块级作用域。</h5>
+</body>
+
+</html>
+<script>
+    // //if块
+    // if (1) {}
+
+    // //while块
+    // while (1) { }
+
+    // //函数块
+    // function foo() {}
+
+    // //for循环块
+    // for (let i = 0; i < 100; i++) {}
+
+    // //单独一个块
+    // {}
+
+
+    // let x = 5
+    // const y = 6
+    // x = 7
+    // y = 9 //报错，const声明的变量不可以修改
+
+
+    // function foo() {
+    //     var a = 1
+    //     let b = 2
+    //     if (a) {
+    //         let b = 3
+    //         var c = 4
+    //         let d = 5
+    //         console.log(a) //1
+    //         console.log(b) //3
+    //     }
+    //     console.log(b) //2
+    //     console.log(c) //4
+    //     console.log(d) // undefined
+    // }
+    // foo()
+
+
+    let myname = '极客时间'
+    if (true) {
+        console.log(myname) // 打印结果：
+            //块级作用域.html:60 Uncaught ReferenceError: Cannot access 'myname' before initialization at
+            // 在块作用域内，let声明的变量被提升，但变量只是创建被提升，初始化并没有被提升，
+            //在初始化之前使用变量，就会形成一个暂时性死区。
+        let myname = '极客邦'
+    }
+</script>

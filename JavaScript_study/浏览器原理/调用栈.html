@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>调用栈</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    var a = 2
+
+    function add(b, c) {
+        console.trace() //使用 trace 函数输出当前调用栈信息，从底部往上分别是，(anonymous),addAll,add
+        return b + c
+    }
+
+    function addAll(b, c) {
+        var d = 10
+        result = add(b, c)
+        return a + result + d
+    }
+    addAll(3, 6)
+
+    //栈溢出示例
+
+    function division(a, b) {
+        return division(a, b)
+    }
+    console.log(division(1, 2))
+</script>

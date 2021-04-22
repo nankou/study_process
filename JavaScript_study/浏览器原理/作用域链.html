@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域链和闭包</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 作用域链 */
+
+    // function bar() {
+    //     // 结果：打印出“极客时间”
+    //     // 原因：在bar()方法中没有找到myName，所以根据作用域链，bar函数的外部引用是全局执行上下文，
+    //     // 即myName= "极客时间"
+    //     console.log(myName) 
+    // }
+
+    // function foo() {
+    //     var myName = "极客邦"
+    //     bar() 
+    // }
+    // var myName = "极客时间"
+    // foo()
+
+
+    /* 块级作用域中的变量查找 */
+
+    function bar() {
+        var myName = "极客世界"
+        let test1 = 100
+        if (1) {
+            let myName = "Chrome浏览器"
+            console.log(test) //打印出1
+
+        }
+    }
+
+    function foo() {
+        var myName = "极客邦"
+        let test = 2
+        if (true) {
+            let test = 3
+            bar()
+        }
+    }
+    var myName = "极客时间"
+    let myAge = 10
+    let test = 1
+    foo()
+</script>

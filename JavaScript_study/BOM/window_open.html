@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>window.open</title>
+</head>
+
+<body>
+    <h1>window.open</h1>
+    <button onclick="toSelf()">跳转self</button>
+    <button onclick="toParent()">跳转parent</button>
+    <button onclick="toTop()">跳转top</button>
+    <button onclick="toBlank()">跳转blank</button>
+    <button onclick="closeWin()">wroxWin关闭窗口</button>
+</body>
+<script>
+    function toSelf() {
+        window.open("https://www.baidu.com", "_self")
+    }
+
+    function toParent() {
+        window.open("https://www.baidu.com", "_parent")
+    }
+
+    function toTop() {
+        window.open("https://www.baidu.com", "_top")
+    }
+
+    function toBlank() {
+        window.open("https://www.baidu.com", "_blank")
+    }
+
+    function closeWin() {
+        var wroxWin = window.open("https://www.baidu.com", "_blank")
+        wroxWin.close() // 关闭新打开的窗口
+        alert(wroxWin.closed) // true
+    }
+</script>
+
+</html>

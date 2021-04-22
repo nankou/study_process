@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>javaScript闭包</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    /* 以下代码片段构成闭包，myName和test1 */
+    function foo() {
+        var myName = "极客时间"
+        let test1 = 1
+        const test2 = 2
+        var innerBar = {
+            getName: function() {
+                console.log(test1)
+                return myName
+            },
+            setName: function(newName) {
+                myName = newName
+            }
+        }
+        return innerBar
+    }
+    var bar = foo()
+    bar.setName("极客邦")
+    bar.getName()
+    console.log(bar.getName())
+
+    // 这段代码中，执行到 return bar 时候的调用栈为
+    // 最底下是全局执行上下文
+    // 变量环境为 bar = undefined 
+    // outer = NULL
+    // 然后是foo函数执行上下文
+    // 变量环境为
+    // myName = "极客时间"
+    // innerBar = function(){...}
+    // outer
+    // 词法环境为
+    // test1 = 1
+    // test2 = 2
+
+
+
+    /* 以下代码片段不构成闭包 */
+    var bar = { // 注意：此时的bar不是函数，而是变量
+        myName: "time.geekbang.com", // 因此该myName只是对象的一个属性
+        printName: function() { // 这里的printName是一个全局声明的函数
+            console.log(myName)
+        }
+    }
+
+    function foo() {
+        let myName = "极客时间"
+        return bar.printName // 调用的是bar变量，所以跟上一行的myName变量无关
+    }
+    let myName = "极客邦"
+    let _printName = foo()
+    _printName() // 极客邦
+    bar.printName() //  极客邦
+
+    // 最终两个方法都是输出极客邦
+    // 因为 _printName() 调用的foo()函数 return 的是bar变量，也就是跟foo函数里的myName无关
+    // 然后因为 bar不是函数而是变量，所以跟bar里面的myName属性无关。最终寻找全局执行上下文中的词法环境中的
+    // myName也就是极客邦。
+    // bar.printName同理
+</script>

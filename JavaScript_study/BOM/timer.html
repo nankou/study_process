@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>timer</title>
+</head>
+
+<body>
+    <button onclick="settimeOut()">超时调用</button>
+    <button onclick="setinterVal()">间歇调用</button>
+
+</body>
+<script>
+    function settimeOut() {
+        // 设置超时调用
+        var timeoutId = setTimeout(() => {
+            alert("hello")
+        }, 1000);
+        // 取消
+        // clearTimeout(timeoutId)
+    }
+
+    function setinterVal() {
+        // 设置间歇调用
+        var interval = setInterval(() => {
+            alert("hello")
+        }, 1000);
+
+        clearInterval(interval)
+    }
+</script>
+
+</html>

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dialog</title>
+</head>
+
+<body>
+    <button onclick="hasAlert()">alert</button>
+    <button onclick="hasConfirm()">confirm</button>
+    <button onclick="hasPrompt()">prompt</button>
+    <button onclick="hasPrint()">print</button>
+    <button onclick="hasFind()">find</button>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br><br><br><br><br>
+    <h1>测试</h1>
+</body>
+<script>
+    function hasAlert() {
+        alert("这是alert框")
+    }
+
+    function hasConfirm() {
+        confirm("这是confirm框嘛？")
+    }
+
+    function hasPrompt() {
+        prompt("这是prompt框？(请填写是或者否）", "是")
+    }
+
+    function hasPrint() {
+        window.print();
+    }
+
+    function hasFind() {
+        console.log(1)
+        window.find("测试");
+    }
+</script>
+
+</html>

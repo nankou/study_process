@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>层叠上下文</title>
+</head>
+
+<body>
+    <div class="position_fix"></div>
+    <div class="z-index2"></div>
+    <div class="filter_blue"></div>
+    <div class="opacity_0"></div>
+
+
+</body>
+<style>
+    .position_fix {
+        position: fixed;
+        background-color: blue;
+        width: 100px;
+        height: 100px;
+    }
+    
+    .z-index2 {
+        z-index: 2;
+        background-color: blueviolet;
+        width: 100px;
+        height: 100px;
+        margin-top: 30px;
+        margin-left: 30px;
+    }
+    
+    .filter_blue {
+        filter: blue(5px);
+        background-color: brown;
+        width: 100px;
+        height: 100px;
+        margin-top: 30px;
+        margin-left: 40px;
+    }
+    
+    .opacity_0 {
+        opacity: 0.5;
+        background-color: chartreuse;
+        width: 100px;
+        height: 100px;
+        margin-left: 60px;
+    }
+</style>
+
+</html>

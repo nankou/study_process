@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        // 宏队列： dom事件回调、ajax回调、定时器回调
+        // 微队列： promise回调、mutation回调
+        setTimeout(() => { // 会立即放到宏队列
+            console.log('timeout callback');
+        }, 0);
+        setTimeout(() => { // 会立即放到宏队列
+            console.log('timeout callback');
+        }, 0);
+        Promise.resolve(1).then(
+            value => { // 会立即放入微队列
+                console.log('Promise onResolved', value)
+            }
+        )
+        Promise.resolve(2).then(
+            value => { // 会立即放入微队列
+                console.log('Promise onResolved', value)
+            }
+        )
+    </script>
+</body>
+
+</html>

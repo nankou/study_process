@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>this指向</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // function foo() {
+    //     console.log(this)
+    // }
+    // foo()
+
+    // 说白了this就是一个指针
+
+    /*1. 通过函数的 call 方法设置 */
+    let bar = {
+        myName: "极客邦",
+        test1: 1
+    }
+
+    function foo() {
+        this.myName = "极客时间"
+    }
+    foo.call(bar)
+    console.log(bar) // 打印出{myName: "极客时间", test1: 1}
+    console.log(myName) // 报错，该变量未定义
+
+    /*2. 通过对象调用方法设置 */
+    var myObj = {
+        name: "极客时间",
+        showThis: function() {
+            console.log(this) // 打印出{name: "极客时间", showThis: ƒ}
+        }
+    }
+    myObj.showThis() // 使用对象来调用其内部的一个方法，该方法的 this 是指向对象本身的
+
+    /* 3. 通过构造函数中设置 */
+    function CreateObj() {
+        this.name = "极客时间"
+    }
+    var myObj = new CreateObj()
+
+    /* this指向的四种规则 */
+    // 1、默认绑定规则：this默认指向window
+    console.log(this === window) // true
+    function test() {
+        console.log(this === window)
+    }
+    test()
+
+    // 2、隐式绑定规则：谁调用就指向谁
+    var obj = {
+        foo: function() {
+            console.log(this) // this指向obj
+            function test() {
+                console.log(this) // this指向window
+            }
+            // test() //独立调用内的this就指向window
+            // return test;    
+        }
+    }
+    obj.foo() // 对象的方法
+
+    /* 隐式丢失：隐式绑定的函数丢失绑定对象，从而默认绑定到全局或者udnefinded */
+    // 情况一： 为函数调用创建别名， 即创建变量放置结果
+
+    function foo() {
+        console.log(this.a)
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    }
+
+    var bar = obj.foo; // 创建别名
+    var a = 1;
+    bar() // 打印出1，即this指向window
+
+    // 情况二：传入回调函数,函数作为参数传递，隐式赋值
+    function foo() {
+        console.log(this.a)
+    }
+
+    function doFoo(fn) { // fn作为参数传递
+        fn();
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    }
+    var a = 1
+    doFoo(obj.foo) // 打印出1，即this指向window
+
+    // 情况三： 出现在内置函数中,比如setTimeout这些
+    function foo() {
+        console.log(this.a)
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    }
+    var a = 1
+    setTimeout(obj.foo, 100) // 打印出1，即this指向window
+        // 其实内置函数的原理跟情况二差不多，因为内置函数的实现可以看作以下：
+        // function setTimeout(fn,delay){
+        //    fn();
+        // }
+
+    // 情况四：函数的赋值
+    function foo() {
+        console.log(this.a)
+    }
+    var obj = {
+        a: 2,
+        foo: foo
+    }
+    var obj2 = {
+        a: 3
+    }
+    var a = 1;
+    (obj2.foo = obj.foo)(); //打印出1，即this指向window
+
+
+    // 3、显式绑定规则： call,apply,bind
+    fn.call(thisArg, param1, ...paramN)
+    fn.apply(thisArg, [param1, ...paramN])
+    fn.bind(thisArg, param1, ...paramN)
+
+    var obj = {
+        a: 2,
+        foo() {
+            console.log(this.a)
+        }
+    }
+
+    var obj2 = {
+        a: 3
+    }
+
+    obj.foo.call(obj2) // 打印出3，this指向obj2  obj.foo.call(obj2,1,2)  传参方式：列出参数
+    obj.foo.apply(obj2) // 打印出3，this指向obj2  obj.foo.apply(obj2,[1,2]) 传参方式：传数组
+    var fn = obj.foo.bind(obj2)
+    fn() // 打印出3，this指向obj2
+
+    // 手写call、apply、bind
+    // call
+    var obj = {
+        name: 2
+    }
+
+    function foo(a, b) {
+        console.log(this.name, a, b)
+    }
+    Function.prototype.newCall = function(that, ...arg) {
+        if (typeof this !== 'function') {
+            throw this + 'is not a function'
+        }
+        that = that || window; // 因为默认不传第一个参数this就会绑定到window上面
+        that.myFn = this;
+        const result = that.myFn(...arg) //解构赋值把参数传进来，先把结果存起来
+        delete that.myFn; //再删除，否则就有副作用了
+        return result // 改变this指向传入的对象
+    }
+    foo.newCall(obj, 1, 2) //指向obj
+
+    // apply
+    var obj = {
+        name: 2
+    }
+
+    function foo(a, b) {
+        console.log(this.name, a, b)
+    }
+    Function.prototype.newApply = function(that, arg) {
+        if (typeof this !== 'function') {
+            throw this + 'is not a function'
+        }
+        that = that || window; // 因为默认不传第一个参数this就会绑定到window上面
+        arg = arg || [];
+        that.myFn = this;
+        const result = that.myFn(...arg) //解构赋值把参数传进来，先把结果存起来
+        delete that.myFn; //再删除，否则就有副作用了
+        return result // 改变this指向传入的对象
+    }
+    foo.newApply(obj, [1, 2]) //指向obj
+
+
+    // bind：bind不同于call和apply，后两者式绑定直接调用，而bind是绑定不调用，返回绑定后的函数
+    var obj = {
+        name: 2
+    }
+
+    function foo() {
+        console.log(this.name)
+    }
+    Function.prototype.newBind = function(that) {
+        if (typeof this !== 'function') {
+            throw new TypeError('Error')
+        }
+        const args = [...arguments].slice(1);
+        const fn = this;
+        return function() {
+                fn.apply(that)
+            }
+            // 返回一个函数
+        return function F() {
+            // 因为返回了一个函数，如果是new的话this就要指向新创建的对象了
+            if (this instanceof F) {
+                return new fn(...args, ...arguments)
+            }
+            return fn.apply(that, args.concat(...arguments))
+        }
+    }
+    foo.newBind(obj)()
+
+
+    // // 4、new绑定
+    function foo() {
+        console.log(this)
+    }
+    foo() // 默认指向window
+    new foo() // 指向foo这个new出来的对象
+
+    // new调用函数的过程
+    // 1、创建一个空对象，构造函数中的this指向这个空对象
+    // 2、这个新对象被执行【【原型】】连接
+    // 3、执行构造函数，属性和方法被添加到this引用的对象中
+    // 4、如果构造函数中没有返回其他对象，那么返回this，即创建的的这个新的对象，否则返回构造函数中返回的对象。
+    function sayHi(name) {
+        this.name = name;
+
+    }
+    var Hi = new sayHi('Yevtte');
+    console.log('Hello,', Hi.name); // Yevtte
+
+
+
+    // 5、箭头函数
+    // 箭头函数没有自己的this，它的this继承于外层代码库中的this
+
+    var name = "1"
+    const obj = {
+        name: 2,
+        foo: () => {
+            console.log(this) // 指向window，指向外部函数，也就是window
+            console.log(this.name) // 打印出1
+        }
+    }
+    obj.foo()
+
+
+    // this绑定优先级
+    // 箭头函数 > new > 显式 > 隐式 > 默认绑定
+
+    // 绑定例外
+    // 如果将null或者是undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则
+    var foo = {
+        name: 'Selina'
+    }
+    var name = 'Chirs';
+
+    function bar() {
+        console.log(this.name);
+    }
+    bar.call(null); //Chirs
+</script>

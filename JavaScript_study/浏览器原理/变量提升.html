@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>变量提升</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    showName()
+    console.log(myname) // 打印出undefined而不是报错,因为变量的声名部分var name = undefined提升了
+    var myname = 'chen' //变量被提升后，会给变量设置默认值，这个默认值就是 undefined
+
+    function showName() {
+        console.log('函数showName被执行');
+    }
+</script>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>promise</title>
+</head>
+
+<body>
+    <div class="container">
+        <h5>Promise是JS中进行异步编程的新的解决方案</h5>
+        <h5>2、从功能上来说；Promise对象用来封装一个异步操作并可以获取其结果</h5>
+        <h5>Promise的状态改变</h5>
+        <h5>Promise的基本状态时pending</h5>
+        <h5>1、pending变成resolved</h5>成功的结果数据一般称为value
+        <h5>2、pending变成rejected</h5>失败的结果数据一般称为reason
+    </div>
+</body>
+
+</html>
+<script>
+    /* Promise基本使用 */
+    // 1、创建一个新的promise对象
+    const p = new Promise((resolve, reject) => { // 执行器函数，执行异步操作  同步回调
+        // 2、执行异步操作任务
+        setTimeout(() => {
+            const time = Date.now()
+            if (time % 2 == 0) {
+                // 3.1 如果成功，调用resolve(value)
+                resolve('成功的数据' + time)
+            } else {
+                // 3.2 如果失败，调用reject(reason)
+                reject('失败的数据' + time)
+            }
+        }, 1000);
+    })
+
+    p.then(
+        value => { // 接收得到成功的value数据  onResolved
+            console.log('成功的回调', value)
+        },
+        reason => { // 接受得到失败的reason数据  onRejected
+            console.log('失败的回调', reason)
+        }
+    )
+
+    /* 如何使用Promise */
+    // API 语法
+</script>

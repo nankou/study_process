@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // test this
+    var number = 5;
+    var obj = {
+        number: 3,
+        fn: (function() {
+            var number;
+            this.number *= 2;
+            number = number * 2;
+            number = 3;
+            return function() {
+                var num = this.number;
+                this.number *= 2;
+                console.log(num); // 10  6 
+                number *= 3;
+                console.log(number); //9  27
+            }
+        })()
+    }
+    var myFun = obj.fn;
+    myFun.call(null); // 全局this = 20 , number = 9
+    obj.fn(); // 
+    console.log(window.number); //20
+
+
+    // function fn() {
+    //     let name = '1'
+    //     console.log(this.name);
+    // }
+    // var fn1 = {
+    //     name: '3',
+    //     fn: fn
+    // }
+    // var name = '2'
+    // fn() // 2 指向全局
+    // fn1.fn() //3 指向调用的对象
+    //     // 需要注意的是：对象属性链中只有最后一层会影响到调用位置。
+    // var fn2 = {
+    //     name: 'fn2',
+    //     fn1: fn1
+    // }
+    // fn2.fn1.fn() // 3 只有最后一层，也就是离它最近的那个对象
+</script>

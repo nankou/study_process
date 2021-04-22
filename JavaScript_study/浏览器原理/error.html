@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>error</title>
+</head>
+
+<body>
+    <div class="container">
+        <h4>通过Error的构造器可以创建一个错误对象。当运行时错误产生时，Error的实例对象会被抛出。Error对象也可用于用户自定义的异常的基础对象。</h4>
+        <span>
+          语法：new Error([message[, fileName[,lineNumber]]])
+          message: 自定义错误信息。
+        </span>
+        <span>
+          1、error的类型
+          Error:通用类型，也是所有错误的父类型。
+          EvalError：表示与全局函数eval()有关的错误,这个异常不再会被JavaScript抛出，但是EvalError对象仍然保持兼容性。
+          RangeError：表示数值变量或参数超出其有效范围。试图传递一个number参数给一个范围内不包含该number的函数时则会引发RangeError。
+          ReferenceError: 表示无效引用。比如引用一个不存在的变量。
+          SyntaxError: 表示eval()在解析代码的过程中发生的语法错误。
+          TypeError：表示值的类型非预期类型时发生的错误。比如当数据类型不正确时抛出错误。
+          URIError: 表示给 encodeURI()或  decodeURl()传递的参数无效。
+          AggregateError: 表示当多个错误​​需要包装在一个错误中时，该对象表示一个错误。这是一个还没有正式使用的功能。
+          InternalError:表示出现在JavaScript引擎内部的错误。 例如： "InternalError: too much recursion"（内部错误：递归过深）
+          这个类型也是非标准的，实际开发中尽量不使用它，所以也就不详细谈了。
+        </span>
+    </div>
+</body>
+
+</html>
+<script>
+    // 处理异常
+    // try catch 捕获错误
+    // throw error 抛出错误
+    // try {
+    //     throw new Error("Whoops!");
+    // } catch (e) {
+    //     alert(e.name + ": " + e.message);
+    //     // message属性：错误相关信息
+    //     // stack属性：函数调用栈记录信息
+    // }
+
+    // ReferenceError：表示无效引用。比如引用一个不存在的变量。
+    // console.log(a)
+
+    // TypeError：表示值的类型非预期类型时发生的错误。比如当数据类型不正确时抛出错误。
+    // let b = null
+    // console.log(b.name)
+
+    // RangeError：表示数值变量或参数超出其有效范围。试图传递一个number参数给一个范围内不包含该number的函数时则会引发RangeError。
+    // function fn() {
+    //     fn()
+    // }
+    // fn() //一直在嵌套调用函数，所以抛出超过了最大调用堆栈大小
+
+    // var arr1 = new Array(-20) // 抛出RangeError错误
+    // var arr2 = new Array(Number.MAX_VALUE) // 抛出RangeError错误
+
+    // SyntaxError: 表示eval()在解析代码的过程中发生的语法错误。
+    // const myname //抛出语法错误
+    // eval("a++b")
+
+
+
+    // 错误的处理(捕获与抛出)
+    // try {
+    //     let b = null
+    //     console.log(b.name)
+    // } catch (error) {
+    //     console.log(error.message)
+    // }
+
+    // // 抛出错误 throw error
+    // function odd() {
+    //  if (Date.now() % 2 === 1) {
+    //     console.log('当前时间为奇数，可以执行任务')
+    // } else { //抛出异常
+    //     throw new Error("当前时间为偶数，不能执行！")
+    // }
+    // }
+    // // 捕获处理异常
+    // try {
+    //     odd()
+    // } catch (error) {
+    //     console.log(error.message)
+    // }
+</script>
