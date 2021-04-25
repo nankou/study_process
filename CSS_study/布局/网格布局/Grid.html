@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网格布局</title>
+</head>
+
+<body>
+    <span>this</span>
+    <div id="container">
+        <div class="one">1</div>
+        <div class="two">2</div>
+        <div class="three">3</div>
+        <div class="four">4</div>
+        <div class="fifth">5</div>
+        <div class="six">6</div>
+        <div class="seven">7</div>
+        <div class="eight">8</div>
+        <div class="nine">9</div>
+    </div>
+    <span>that</span>
+
+</body>
+<style>
+    #container {
+        /* 设置成网格布局 */
+        display: grid;
+        /* 默认情况下，容器元素都是块级元素，但也可以设成行内元素。 */
+        /* display: inline-grid; */
+        /* 定义每一列的列宽 */
+        /* grid-template-columns: repeat(auto-fill, 50px); */
+        /* grid-template-columns: minmax(0, 300px) minmax(200px, 1fr) 150px; */
+        /* auto关键字 */
+        /* grid-template-columns: 100px auto 100px; */
+        /* grid-template-columns: 50px 50px 50px; */
+        /* 定义每一行的行高 */
+        /* grid-template-rows: 50px 0 0 0; */
+        /* 行间距 */
+        row-gap: 20px;
+        /* 列间距 */
+        column-gap: 20px;
+        /* grid-template-areas 属性 */
+        grid-template-areas: "header header header" "main main sidebar" "footer footer footer";
+        /* grid-auto-flow属性 */
+        grid-auto-flow: column
+    }
+    
+    .one {
+        background-color: aliceblue;
+    }
+    
+    .two {
+        background-color: blue;
+    }
+    
+    .three {
+        background-color: plum;
+    }
+    
+    .four {
+        background-color: royalblue;
+    }
+</style>
+
+</html>

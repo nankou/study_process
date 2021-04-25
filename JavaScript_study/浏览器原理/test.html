@@ -15,27 +15,27 @@
 </html>
 <script>
     // test this
-    var number = 5;
-    var obj = {
-        number: 3,
-        fn: (function() {
-            var number;
-            this.number *= 2;
-            number = number * 2;
-            number = 3;
-            return function() {
-                var num = this.number;
-                this.number *= 2;
-                console.log(num); // 10  6 
-                number *= 3;
-                console.log(number); //9  27
-            }
-        })()
-    }
-    var myFun = obj.fn;
-    myFun.call(null); // 全局this = 20 , number = 9
-    obj.fn(); // 
-    console.log(window.number); //20
+    // var number = 5;
+    // var obj = {
+    //     number: 3,
+    //     fn: (function() {
+    //         var number;
+    //         this.number *= 2;
+    //         number = number * 2;
+    //         number = 3;
+    //         return function() {
+    //             var num = this.number;
+    //             this.number *= 2;
+    //             console.log(num); // 10  6 
+    //             number *= 3;
+    //             console.log(number); //9  27
+    //         }
+    //     })()
+    // }
+    // var myFun = obj.fn;
+    // myFun.call(null); // 全局this = 20 , number = 9
+    // obj.fn(); // 
+    // console.log(window.number); //20
 
 
     // function fn() {
@@ -55,4 +55,24 @@
     //     fn1: fn1
     // }
     // fn2.fn1.fn() // 3 只有最后一层，也就是离它最近的那个对象
+
+    var length = 10;
+
+    function fn() {
+        console.log(this.length);
+    }
+
+    var obj = {
+        length: 5,
+        method: function(fn) {
+            fn();
+            arguments[0](); // 调用了 fn()
+        }
+    };
+
+    obj.method(fn, 1, 2, 4);
+
+    // 总结： arguments 是一种特殊的对象。
+    // 在函数中，我们无需指出参数名，就能访问。
+    // 可以认为它是一种，隐式的传参形式。
 </script>

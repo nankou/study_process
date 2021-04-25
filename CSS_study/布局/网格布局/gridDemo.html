@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>网格布局demo</title>
+</head>
+
+<body>
+    <div id="container">
+        <div class="header">
+            <img src="./photo/header.png" />
+        </div>
+        <div class="navBar">
+            <img src="./photo/navBar.png" />
+        </div>
+        <div class="advertising">
+            <div class="left">
+                <img src="./photo/left.png" />
+            </div>
+            <div class="right">
+                <img src="./photo/right.png" />
+            </div>
+        </div>
+        <div class="content">
+            <div class="one">
+                <img src="./photo/one.png" />
+                <img src="./photo/four.png" />
+            </div>
+            <div class="two">
+                <img src="./photo/two.png" />
+                <img src="./photo/five.png" />
+                <img src="./photo/seven.png" />
+            </div>
+            <div class="three">
+                <img src="./photo/three.png" />
+                <img src="./photo/six.png" />
+                <img src="./photo/eight.png" />
+            </div>
+        </div>
+    </div>
+</body>
+<style>
+    * {
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 0;
+    }
+    
+    img {
+        width: 100%;
+        height: auto;
+        margin: 0;
+    }
+    
+    #container {
+        display: grid;
+    }
+    
+    .advertising {
+        display: grid;
+        /* 使用网格布局设置比例左右两边为2:1的布局 */
+        grid-template-columns: 2fr 1fr;
+        justify-items: center;
+        align-items: center;
+        /* 设置列间距 */
+        column-gap: 2rem;
+    }
+    
+    .left {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .right {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 10px;
+        padding: 0;
+    }
+</style>
+
+</html>

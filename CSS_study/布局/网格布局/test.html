@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="container">
+        <div class="item">item</div>
+        <div class="item">item</div>
+        <div class="item">item</div>
+        <div class="item">item</div>
+    </div>
+</body>
+
+<style>
+    #container {
+        text-align: center;
+    }
+    
+    .header {
+        background-color: aqua;
+    }
+    
+    .navBar {
+        background-color: purple;
+    }
+    
+    .advertising {
+        /* 使用网格布局设置比例左右两边为2:1的布局 */
+        grid-template-columns: 2fr 1fr;
+        justify-items: start;
+        align-items: center;
+        /* 设置列间距 */
+        column-gap: 2rem;
+    }
+    
+    .content {
+        background-color: yellow;
+        display: grid;
+        /* 使用网格布局设置三列宽度一致*/
+        grid-template-columns: 1fr 1fr 1fr;
+        margin-top: 10px;
+        padding: 0;
+        height: 20rem;
+    }
+    
+    .one {
+        background-color: violet;
+    }
+    
+    .three {
+        background-color: turquoise;
+    }
+</style>
+
+</html>

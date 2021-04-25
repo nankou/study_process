@@ -20,6 +20,30 @@
     // foo()
 
     // 说白了this就是一个指针
+    // this是当前执行上下文的一个属性，如果没有调用，那么this也就没有指向可言、
+    // this 总会指向，调用函数的那个对象。
+    // 从执行上下文角度来看：全局执行上下文、函数执行上下文
+    //
+
+    // 为什么要使用this
+    var myName = {
+        name: 'nankou',
+        age: 21,
+        sayName: function() {
+            return fn.name
+        }
+    }
+
+
+    // 没有this机制的情况下,可以明确的把这个对象传给函数，但是当模式越来越复杂，逻辑越来越多的时候，
+    // 就会显得很混乱，使用this会使代码变得更加优雅,使代码可复用并易于阅读
+    var myName = {
+        name: 'nankou',
+        age: 21,
+        sayName: function() {
+            return this.name
+        }
+    }
 
     /*1. 通过函数的 call 方法设置 */
     let bar = {
@@ -28,7 +52,7 @@
     }
 
     function foo() {
-        this.myName = "极客时间"
+        this.myName = "nankou"
     }
     foo.call(bar)
     console.log(bar) // 打印出{myName: "极客时间", test1: 1}
@@ -36,7 +60,7 @@
 
     /*2. 通过对象调用方法设置 */
     var myObj = {
-        name: "极客时间",
+        name: "nankou",
         showThis: function() {
             console.log(this) // 打印出{name: "极客时间", showThis: ƒ}
         }
@@ -45,15 +69,19 @@
 
     /* 3. 通过构造函数中设置 */
     function CreateObj() {
-        this.name = "极客时间"
+        this.name = "nankou"
     }
     var myObj = new CreateObj()
 
     /* this指向的四种规则 */
-    // 1、默认绑定规则：this默认指向window
+    // 1、默认绑定规则：this默认指向全局对象，在浏览器中就是window
     console.log(this === window) // true
+
+    myName = 'nankou'
+    console.log(myName); // nankou
+
     function test() {
-        console.log(this === window)
+        console.log(this === window) // true
     }
     test()
 
@@ -130,7 +158,8 @@
     (obj2.foo = obj.foo)(); //打印出1，即this指向window
 
 
-    // 3、显式绑定规则： call,apply,bind
+    // 3、显式绑定规则： call,apply,bind 
+    // 在非严格模式下使用 call 和 apply 时，如果用作 this 的值不是对象，则会被尝试转换为对象。
     fn.call(thisArg, param1, ...paramN)
     fn.apply(thisArg, [param1, ...paramN])
     fn.bind(thisArg, param1, ...paramN)
@@ -152,6 +181,10 @@
     fn() // 打印出3，this指向obj2
 
     // 手写call、apply、bind
+    // 我们手写函数的时候一定要知道这个函数要用来做什么，从刚刚的显示绑定中可以看出来，这三个函数就是为了
+    // 改变this的指向给传入的对象
+    // 那么我们的目标就很明确了，创建这个函数挂载在原型链上并手写改变this的指向逻辑
+
     // call
     var obj = {
         name: 2
@@ -160,17 +193,17 @@
     function foo(a, b) {
         console.log(this.name, a, b)
     }
-    Function.prototype.newCall = function(that, ...arg) {
-        if (typeof this !== 'function') {
+    Function.prototype.newCall = function(that, ...arg) { // 挂载在原型链上
+        if (typeof this !== 'function') { // 首先判断this指向是不是函数，如果不是的话就抛出错误，因为我们是在函数执行上下文中使用这三个函数
             throw this + 'is not a function'
         }
         that = that || window; // 因为默认不传第一个参数this就会绑定到window上面
-        that.myFn = this;
+        that.myFn = this; // 将this指向绑定给传入的对象的函数
         const result = that.myFn(...arg) //解构赋值把参数传进来，先把结果存起来
         delete that.myFn; //再删除，否则就有副作用了
-        return result // 改变this指向传入的对象
+        return result // 改变this指向传入的对象，return出去
     }
-    foo.newCall(obj, 1, 2) //指向obj
+    foo.newCall(obj, 1, 2) //结果指向obj
 
     // apply
     var obj = {
@@ -184,7 +217,7 @@
         if (typeof this !== 'function') {
             throw this + 'is not a function'
         }
-        that = that || window; // 因为默认不传第一个参数this就会绑定到window上面
+        that = that || window; // 因为默认不传第一个参数this就会绑定到window上面，即使用默认绑定规则
         arg = arg || [];
         that.myFn = this;
         const result = that.myFn(...arg) //解构赋值把参数传进来，先把结果存起来
@@ -263,6 +296,7 @@
 
     // 绑定例外
     // 如果将null或者是undefined作为this的绑定对象传入call、apply或者是bind，这些值在调用时会被忽略，实际应用的是默认绑定规则
+    // 如果不传，同理也是
     var foo = {
         name: 'Selina'
     }
@@ -272,4 +306,22 @@
         console.log(this.name);
     }
     bar.call(null); //Chirs
+
+    // test
+    window.val = 1;
+
+    var obj = {
+        val: 2,
+        dbl: function() {
+            this.val *= 2;
+            val *= 2;
+            console.log('val:', val);
+            console.log('this.val:', this.val);
+        }
+    };
+
+    // 说出下面的输出结果
+    obj.dbl(); //  2  4
+    var func = obj.dbl;
+    func(); // 8 8
 </script>
