@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>异步编程</title>
+</head>
+
+<body>
+
+    <script>
+        // 回调函数：把同步操作变成异步
+        // 优点：简单、容易理解、优化了程序执行速度
+        // 缺点：代码阅读和理解、各个部分高度耦合，而且每个任务只能指定一个回调函数
+        function f1(callback) {
+            setTimeout(function() { // f1的任务代码
+                callback();
+            }, 1000);
+        }
+        f1(f2)
+    </script>
+
+</body>
+
+</html>
