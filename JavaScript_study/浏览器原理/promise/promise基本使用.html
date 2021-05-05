@@ -46,6 +46,30 @@
         }
     )
 
+
     /* 如何使用Promise */
-    // API 语法
+    function usePromise(id) {
+        return new Promise((resolve, reject) => {
+            if (id == 1) {
+                console.log(1)
+                resolve(1)
+            } else {
+                console.log(false)
+                reject(2)
+            }
+        })
+    }
+    usePromise(1).then(
+        id => {
+            console.log(id);
+        }
+    )
+
+    /* promise常用API */
+    // promise.resolve(value)  --类方法，返回的状态为resolved
+    // promise.reject(reason)  --类方法，返回的状态为rejected
+    // Promise.prototype.then  --实例方法，注册回调函数
+    // Promise.prototype.catch --实例方法，捕获异常
+    // Promise.race  -- 类方法，返回最先执行的promise任务结果
+    // Promise.all   -- 类方法，返回所有任务成功的结果或者其中一个任务失败的结果
 </script>

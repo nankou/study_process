@@ -10,7 +10,16 @@
 
 <body>
     <script src="./Promise_class.js"></script>
-    <!-- <script>
+    <script>
+        // 关于promsie A+规范
+        // 笔者看过大概十几集关于promise的视频，也搜索过掘金里面的很多文章
+        // 但是总觉得对于promise一知半解，而且无法形成知识体系，网上资料知识点过于杂乱
+        // 所以这里用分享一下我对promise的理解
+        // 首先是promiseA+规范
+        // 我记得那天我在大巴上，看着网上的文章越看越一头雾水，于是沉下心来想看promiseA+规范
+        // 于是通读了翻译成中文的promiseA+规范
+
+
         // 1、定义整体结构
         const p = new Promise((resolve, reject) => {
             setTimeout(() => {
@@ -42,7 +51,7 @@
     </script> -->
 
     <!-- resolve/reject使用 -->
-    <!-- <script>
+    <script>
         const p1 = Promise.resolve(1) // 如果是一般值
         const p2 = Promise.resolve(Promise.resolve(3))
         const p3 = Promise.resolve(Promise.reject(4))
@@ -55,9 +64,11 @@
         p3.catch(reason => {
             console.log('p3', reason)
         })
-    </script> -->
+    </script>
 
     <script>
+        // Promise.race
+        // Promise.all
         const p1 = Promise.resolve(1) // 如果是一般值
         const p2 = Promise.resolve(Promise.resolve(3))
         const p3 = Promise.resolve(Promise.reject(4))

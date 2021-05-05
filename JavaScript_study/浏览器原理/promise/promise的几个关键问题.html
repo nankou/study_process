@@ -14,6 +14,7 @@
         // （1）resolve(value)：如果当前是pending就会变成resolved
         // （2）reject(reason)：如果当前是pending就会变成rejected
         // （3）抛出异常：如果当前是pending就会变成rejected
+        //  注意，一旦promise的状态被改变，便不能再次改变（只能改一次）
 
         // 2、 一个promise指定多个成功 / 失败回调函数， 都会调用吗？
         // 当promise改变为对应状态时都会调用

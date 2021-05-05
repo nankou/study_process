@@ -11,15 +11,44 @@
 <body>
 
     <script>
+        // javascript为什么要用异步编程？
+        // 因为javascript是单线程的，所以也就是说，同步代码很有可能会阻塞任务。
+
+
+        // 异步编程的解决办法
+        // 回调函数 ---> Promise ---> Generator ---> async/await.
         // 回调函数：把同步操作变成异步
         // 优点：简单、容易理解、优化了程序执行速度
-        // 缺点：代码阅读和理解、各个部分高度耦合，而且每个任务只能指定一个回调函数
+        // 缺点：代码阅读和理解、各个部分高度耦合，而且每个任务只能指定一个回调函数，会出现回调地狱 
+        // 如果某个业务，依赖于上层业务的数据，上层业务又依赖于更上一层的数据，我们还采用回调的方式来处理异步的话，就会出现回调地狱。
         function f1(callback) {
             setTimeout(function() { // f1的任务代码
                 callback();
             }, 1000);
         }
         f1(f2)
+
+
+        // promise
+        // promise不是某种特定的实现，而是一种规范，是一套处理JavaScript异步的机制
+        const p1 = Promise.resolve(1)
+        const p2 = Promise.resolve(Promise.resolve(3))
+        const p3 = Promise.resolve(Promise.reject(4))
+        p1.then(value => {
+            console.log('p1', value)
+        })
+        p2.then(value => {
+            console.log('p2', value)
+        })
+        p3.catch(reason => {
+            console.log('p3', reason)
+        })
+
+        // 生成器Generator
+        // 需要手动去控制next(...)，将回调成功返回的数据送回JavaScript主流程中
+
+        // Async/await
+        // 用同步的方法书写异步代码
     </script>
 
 </body>

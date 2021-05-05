@@ -104,10 +104,9 @@
                         }
                     })
                 } else if (self.status === RESOLVED) { // 如果当前是resolved状态，异步执行onResovle并改变return的promise状态
-                    setTimeout(() => {
-                        handle(onResolved)
+                    handle(onResolved)
 
-                    });
+                    setTimeout(() => {});
                 } else { // 如果当前是rejected状态，异步执行onReject并改变return的promise状态
                     setTimeout(() => {
                         handle(onRejected)
