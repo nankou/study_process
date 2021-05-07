@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PromiseA+规范</title>
+</head>
+
+<body>
+    <script>
+        // 关于promsie A+规范
+        // 笔者看过大概十几集关于promise的视频，也搜索过掘金里面的很多文章
+        // 但是总觉得对于promise一知半解，而且无法形成知识体系，网上资料知识点过于杂乱
+        // 所以这里用分享一下我对promise的理解
+        // 首先是promiseA+规范
+        // 我记得那天我在大巴上，看着网上的文章越看越一头雾水，于是沉下心来想看promiseA+规范
+        // 于是通读了翻译成中文的promiseA+规范
+        // 一个开放、健全且通用的 JavaScript Promise 标准。由开发者制定，供开发者参考。
+        // 我想这句话是非常重要的，我们不需要一个严苛一成不变的标准，在学习promise的时候我们
+        // 更应该思考的是为什么开发者设计出来出来这种标准，怎么样有利于我们的开发。
+        // 又是怎么实现它的便捷性的。
+        // 首先什么是promise
+        // promise表示一个异步操作的结果，与之相配的是then方法，该方法注册了两个回调函数分别是resolve和reject
+        // 又或者说 promise 是一个拥有 then 方法的对象或函数。
+        // 解决（fullfill/ resolve）：指一个promise成功时进行的的一系列操作。
+        // 拒绝（reject）：指一个promise失败时进行的一系列操作。
+        // 终值（value）：指promise被解决时传递给解决回调的值
+        // 原因（reason）： 指promise被拒绝时传递给拒绝回调的值
+        // thenable：是一个定义了then方法的对象或者函数
+        // 值value：指任何JavaScript的合法值，包括 undefined , thenable 和 promise
+        // 异常exception：是使用 throw 语句抛出的一个值
+        // 据因reason：表示一个 promise 的拒绝原因。
+        // promise的状态：一个 Promise 的当前状态必须为以下三种状态中的一种：等待态（Pending）、执行态（Fulfilled）和拒绝态（Rejected）。
+        // 并且promise的状态只能修改一次。
+        // 接下来看一下三个状态
+        // 1、等待态pending，翻译过来就是【未决定的】，也就是说当前promise的状态还没有被改变，promise还没有成功或者失败
+        // 此时可以迁移至执行态或拒绝态
+        // 2、执行态fullfilled/resolved
+        // 此时promise已经成功而且拥有不可变的终值value
+        // 3、拒绝态rejected
+        // 此时promise已经失败而且拥有不可变的原因reason
+        // then方法
+        // then方法就是提供来访问promise状态的
+        // 这个then方法接受两个参数，分别是onFulfuilled和onRejected 
+        // promise.then(onFulfilled, onRejected)
+        // then方法可以被多次调用比如
+        // const p = new Promise((resolve, reject) => {
+        //         setTimeout(() => {
+        //             reject(2)
+
+        //         }, 1000);
+        //     }).then(
+        //         value => {},
+        //         reason => {}
+        //     ).then(
+        //         value => {},
+        //         reason => {}
+        //     ).catch(
+        //         reason => {}
+        //     )
+
+
+        // then的返回
+        // then方法必须返回一个promise对象
+        // 注意：比如我们在这段代码中，不论 promise1 被 reject 还是被 resolve 时 它的返回值 都会被 resolve，只有出现异常时才会被 rejected。
+        // const promise2 = new Promise((resolve, reject) => {
+        //     setTimeout(() => {
+        //         reject(2)
+        //     }, 1000);
+        // }).then(
+        //     value => {
+        //         console.log("value1 " + value);
+        //     },
+        //     reason => {
+        //         console.log("reason1 " + reason);
+        //     }
+        // ).then(
+        //     value => {
+        //         console.log("value2 " + value);
+        //     },
+        //     reason => {
+        //         console.log("reason2 " + reason);
+        //     }
+        // ).catch(
+        //     reason => {
+        //         console.log("catch");
+        //     }
+        // )
+    </script>
+</body>
+
+</html>
+
+</html>
