@@ -109,9 +109,8 @@ function resolvePromise(promise, x, resolve, reject) {
         // 如果 then 是函数
         if (typeof then === 'function') {
             var called = false;
-            // 将 x 作为函数的作用域 this 调用之
+            // 将 x 作为函数的作用域 this 调用
             // 传递两个回调函数作为参数，第一个参数叫做 resolvePromise ，第二个参数叫做 rejectPromise
-            // 名字重名了，我直接用匿名函数了
             try {
                 then.call(
                     x,
