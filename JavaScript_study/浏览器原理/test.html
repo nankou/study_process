@@ -56,23 +56,65 @@
     // }
     // fn2.fn1.fn() // 3 只有最后一层，也就是离它最近的那个对象
 
-    var length = 10;
+    // var length = 10;
 
-    function fn() {
-        console.log(this.length);
-    }
+    // function fn() {
+    //     console.log(this.length);
+    // }
 
-    var obj = {
-        length: 5,
-        method: function(fn) {
-            fn();
-            arguments[0](); // 调用了 fn()
-        }
-    };
+    // var obj = {
+    //     length: 5,
+    //     method: function(fn) {
+    //         fn();
+    //         arguments[0](); // 调用了 fn()
+    //     }
+    // };
 
-    obj.method(fn, 1, 2, 4);
+    // obj.method(fn, 1, 2, 4);
 
     // 总结： arguments 是一种特殊的对象。
     // 在函数中，我们无需指出参数名，就能访问。
     // 可以认为它是一种，隐式的传参形式。
+
+
+    // async function foo() {
+    //     console.log(1)
+    //     let a = await 100
+    //     console.log(a)
+    //     console.log(2)
+    // }
+    // console.log(0)
+    // foo()
+    // console.log(3)
+
+
+    async function foo() {
+        console.log('foo')
+    }
+    async function bar() {
+        console.log('bar start')
+        await foo()
+        console.log('bar end')
+    }
+    console.log('script start')
+    setTimeout(function() {
+            console.log(' setTimeout')
+        }, 0) //宏队列异步
+    bar();
+    new Promise(function(resolve) {
+        console.log('promise executor')
+        resolve();
+    }).then(function() {
+        console.log('promise then') //微队列异步
+    })
+    console.log('script end')
+        //script start
+        //bar start
+        // foo
+        // promise executor
+        // script end
+
+    //bar end
+    //promise then
+    // setTimeout
 </script>
