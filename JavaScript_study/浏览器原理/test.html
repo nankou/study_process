@@ -88,33 +88,95 @@
     // console.log(3)
 
 
-    async function foo() {
-        console.log('foo')
-    }
-    async function bar() {
-        console.log('bar start')
-        await foo()
-        console.log('bar end')
-    }
-    console.log('script start')
-    setTimeout(function() {
-            console.log(' setTimeout')
-        }, 0) //宏队列异步
-    bar();
-    new Promise(function(resolve) {
-        console.log('promise executor')
-        resolve();
-    }).then(function() {
-        console.log('promise then') //微队列异步
-    })
-    console.log('script end')
-        //script start
-        //bar start
-        // foo
-        // promise executor
-        // script end
+    // async function foo() {
+    //     console.log('foo')
+    // }
+    // async function bar() {
+    //     console.log('bar start')
+    //     await foo()
+    //     console.log('bar end')
+    // }
+    // console.log('script start')
+    // setTimeout(function() {
+    //         console.log(' setTimeout')
+    //     }, 0) //宏队列异步
+    // bar();
+    // new Promise(function(resolve) {
+    //     console.log('promise executor')
+    //     resolve();
+    // }).then(function() {
+    //     console.log('promise then') //微队列异步
+    // })
+    // console.log('script end')
+    //     //script start
+    //     //bar start
+    //     // foo
+    //     // promise executor
+    //     // script end
 
-    //bar end
-    //promise then
-    // setTimeout
+    // //bar end
+    // //promise then
+    // // setTimeout
+
+    //     获取 url 中的参数
+    // 1. 指定参数名称，返回该参数的值 或者 空字符串
+    // 2. 不指定参数名称，返回全部的参数对象 或者 {}
+    // 3. 如果存在多个同名参数，则返回数组
+
+    // function getUrlParam(sUrl, sKey) {
+    //     var keyString = sUrl.split("?")[1].split("#")[0].split("&") // 切割字符串
+    //     var urlObj = new Object(); // 声明对象
+    //     const urlArr = [] // 声明数组
+    //     const valueArr = []
+    //     if (sKey) {
+    //         // 1. 指定参数名称，返回该参数的值 或者 空字符串
+    //         keyString.forEach(element => {
+    //             urlArr.push({
+    //                 key: element.split('=')[0],
+    //                 value: element.split('=')[1]
+    //             })
+    //         });
+    //         urlArr.forEach(ntem => {
+    //             if (ntem.key === sKey) {
+    //                 valueArr.push(
+    //                     ntem.value
+    //                 )
+    //             } else {
+    //                 return ""
+    //             }
+    //         })
+    //         if (valueArr.length === 1) {
+    //             return valueArr[0] // 返回参数的值
+    //         } else if (valueArr.length == 0) {
+    //             return "" // 返回空字符串
+    //         } else {
+    //             return valueArr // 返回参数的数组
+    //         }
+    //     } else {
+    //         if (keyString === undefined) {
+    //             return {}
+    //         } else {
+    //             // 不指定参数名称，返回全部的参数对象 或者 {}
+    //             keyString.forEach((ntem, index) => {
+    //                 var tmp = ntem.split('=');
+    //                 if (!(tmp[0] in urlObj)) {
+    //                     urlObj[tmp[0]] = [];
+    //                 }
+    //                 urlObj[tmp[0]].push(tmp[1]);
+    //             })
+    //             return urlObj
+    //         }
+
+    //     }
+
+    // }
+
+
+    // var a = getUrlParam('http://www.nowcoder.com?key=1&key=2&key=3&key=4&test=4#hehe', 'abc');
+    // console.log(a);
+    // if (a === '') {
+    //     console.log(true);
+    // } else {
+    //     console.log(false);
+    // }
 </script>
