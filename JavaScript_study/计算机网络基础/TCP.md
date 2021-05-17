@@ -1,4 +1,4 @@
-# TCP
+# TCP（传输控制协议）
 
 ## TCP的特点
 ### 1、TCP是面向连接的运输层协议
@@ -84,5 +84,5 @@ Server检查ack是否为K+1，ACK是否为1，如果正确则连接建立成功�
 
 
 参考资料：
-https://www.jianshu.com/p/ef892323e68f
+TCP协议详解 https://www.jianshu.com/p/ef892323e68f
 以及谢希仁编著的《计算机网络》
