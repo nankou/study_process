@@ -39,12 +39,26 @@
      display:inline-block 设置成行内块级元素
      6、设置居中
      行内元素： text-align:center /*行内元素均会水平居中*/ 
+         div{height:30px; line-height:30px} /*DIV内的行内元素均会垂直居中*/ 
+         
      块级元素：p{margin:0 auto; width:500px} /*块级元素p一定要设置宽度为父容器宽度才能居中*/
+     div{width:500px} /*DIV父容器设置宽度*/ div p{margin:0 aut0; height:30px; line-height:30px} /*块级元素p也可以加个宽度， 以达到相对于DIV父容器的水平居中效果*/
 
 </textarea> -->
-        <span style="width: 200px;background-color: #1e7e34">行内元素</span>
-        <div style="width: 200px;background-color: #bbb">块级元素</div>
+        <span style="background-color: #1e7e34;padding-top: 20px;">行内元素</span>
+        <div style="background-color: #bbb;padding-top: 20px;">块级元素</div>
     </div>
 </body>
 
 </html>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    .container {
+        margin: 0;
+        padding: 0;
+    }
+</style>
