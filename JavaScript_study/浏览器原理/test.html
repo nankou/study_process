@@ -190,19 +190,59 @@
     // minNumberInRotateArray(rotateArray)
 
 
-    var ws = new WebSocket("wss://echo.websocket.org");
+    // var ws = new WebSocket("wss://echo.websocket.org");
 
-    ws.onopen = function(evt) {
-        console.log("Connection open ...");
-        ws.send("Hello WebSockets!");
-    };
+    // ws.onopen = function(evt) {
+    //     console.log("Connection open ...");
+    //     ws.send("Hello WebSockets!");
+    // };
 
-    ws.onmessage = function(evt) {
-        console.log("Received Message: " + evt.data);
-        ws.close();
-    };
+    // ws.onmessage = function(evt) {
+    //     console.log("Received Message: " + evt.data);
+    //     ws.close();
+    // };
 
-    ws.onclose = function(evt) {
-        console.log("Connection closed.");
-    };
+    // ws.onclose = function(evt) {
+    //     console.log("Connection closed.");
+    // };
+
+
+    // function MoreThanHalfNum_Solution(numbers) {
+    //     // write code here
+    //     let times = numbers.length / 2;
+    //     let obj = {};
+    //     for (let i = 0; i < numbers.length; i++) {
+    //         console.log(obj[numbers[i]]);
+    //         if (!obj[numbers[i]]) {
+    //             obj[numbers[i]] = 1;
+    //         } else {
+    //             obj[numbers[i]]++;
+    //         }
+    //         if (obj[numbers[i]] > times) {
+    //             // return numbers[i]
+    //             console.log(numbers[i]);
+    //         }
+    //     }
+    //     // return 0
+    //     console.log(0);
+    // }
+
+    // MoreThanHalfNum_Solution([1, 2, 3, 2, 2, 2, 5, 4, 2])
+
+    function FindGreatestSumOfSubArray(array) {
+        // write code here
+        let newArray = [];
+        var result = 0
+        for (let i = 0; i < array.length; i++) {
+            if (array[i] > 0) {
+                newArray.push(array[i])
+            }
+        }
+        newArray.forEach(item => {
+            result = result + item
+        })
+        console.log(result);
+    }
+
+    FindGreatestSumOfSubArray([1, -2, 3, 10, -4, 7, 2, -5])
 </script>

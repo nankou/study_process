@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>hash模式+history模式</title>
+</head>
+
+<body>
+
+</body>
+
+</html>
+<script>
+    // 前端的两种路由方式：hash 和 history
+    //  hash 模式：监听 url 中 hash 的变化，然后渲染不同的内容，执行相应的js切换网页；
+    // 使用window.location.hash以及 onhashchange事件，监听浏览器地址hash变化。
+
+    // window.location.hash = "abc"
+    // let hash = window.location.hash
+
+    // window.addEventListener('hashchange', function() {
+    //     const oldURL = event.oldURL; // 上一个URL
+    //     const newURL = event.newURL; // 当前的URL
+    //     console.log(newURL, oldURL);
+    // })
+
+    // history 模式：监听 url 中的路径变化，实现url地址改变，网页内容改变；
+    // window.history 属性指向 History 对象，它表示当前窗口的浏览历史。
+    // 常用的属性
+    // History.length：当前窗口访问过的网址数量（包括当前网页）
+    // History.state：History 堆栈最上层的状态值（详见下文）
+    // 常用的方法
+    //  back()：后退到上一个路由；
+    // forward()：前进到下一个路由，如果有的话；
+    // go(number)：进入到任意一个路由，正数为前进，负数为后退；
+    // 调用上面这三个方法的时候会触发popstate事件，
+    history.go(1)
+    window.addEventListener('popstate', function(e) {
+        //e.state 相当于 history.state
+        console.log('state: ' + JSON.stringify(e.state));
+        console.log(history.state);
+    });
+
+    // pushState(obj, title, url)：前进到指定的 URL，不刷新页面；
+    // replaceState(obj, title, url)：用 url 替换当前的路由，不刷新页面；
+</script>

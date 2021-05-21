@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>跨页面通信</title>
+</head>
+
+<body>
+    <div>
+        <h1>跨页面通信</h1>
+    </div>
+</body>
+
+</html>
+<script>
+    // 同源页面之间的跨页面通信
+    // // 1、广播通信
+    // const broadcast = new BroadcastChannel("nankou") //使用构造函数创建实例
+    // console.log(broadcast.name); // 使用name获取实例的属性name值
+
+    // // 监听广播消息
+    // // 使用onmessage监听广播的消息
+    // broadcast.onmessage = function(e) {
+    //     // console.log('广播的消息:', e.data);
+    //     const data = e.data;
+    //     const text = '[receive] ' + data.msg + ' —— tab ' + data.from;
+    //     console.log('[BroadcastChannel] receive message:', text);
+    // };
+    // // 如果出现了错误，也可以通过onmessageerror绑定监听
+    // broadcast.onmessageerror = function(e) {
+    //     console.warn('error:', e);
+    // };
+
+    // // 发送广播消息
+    // broadcast.postMessage('hello')
+
+    // // 取消广播监听
+    // broadcast.close();
+
+    // 2、Service Worker
+    //  是一个可以长期运行在后台的 Worker
+    // Service workers 本质上充当 Web 应用程序、浏览器与网络（可用时）之间的代理服务器。
+    // Service worker运行在worker上下文，因此它不能访问DOM。相对于驱动应用的主JavaScript线程，它运行在其他线程中，
+    // 所以不会造成阻塞。它设计为完全异步，同步API（如XHR和localStorage）不能在service worker中使用。
+    // 使用方式 下载 -- 安装 -- 激活
+    // 使用 ServiceWorkerContainer.register() 方法首次注册service worker
+
+    /* 页面逻辑 */
+    // navigator.serviceWorker.register('../util.sw.js').then(function() {
+    //     console.log('Service Worker 注册成功');
+    // });
+
+    // // 3、LocalStorage
+    // // 本地存储 ,当LocalStorage变化的时候，会触发storage事件StorageEvent，利用这个特性，我们可以在发送消息时，把消息写入到某个 LocalStorage 中；
+    // // 然后在各个页面内，通过监听storage事件即可收到通知。
+    // window.addEventListener('storage', function(e) {
+    //     if (e.key === 'ctc-msg') {
+    //         const data = JSON.parse(e.newValue);
+    //         const text = '[receive] ' + data.msg + ' —— tab ' + data.from;
+    //         console.log('[Storage I] receive message:', text);
+    //     }
+    // });
+
+    // 4、window.opener
+    // 我们都知道window.open是打开一个新页面，那么window.opener就是打开该页面的前一个页面。
+    // 比如我们从 https://github.com/nankou跳转到https://juejin.cn/user/3773179639634423，
+    // 那么window.opener就是“https://github.com/nankou”
+    // 我们可以在父页面
+    // <a href = './child.html' target = "_blank" > 去子页面 < /a>
+
+    // 然后在子页面
+    if (window.opener) {
+        const showMsg = document.querySelector('#showMsg');
+        showMsg.innerHTML = '我是通过父页面当中的数据';
+        window.opener.document.querySelector('#childModify').innerText = '我是通过子页面修改的!'; // 改变父页面展示
+    }
+
+
+    // // 然后我们存储本地存储
+    // window.localStorage.setItem('nankou', '123');
+
+    // 非同源页面之间的通信
+    // 以上的方法都是同源页面的通信，那如果是两个域名的标签页，应该如何无障碍的通信呢。
+    //  使用iframe作为中间站，由于 iframe 与父页面间可以通过指定origin来忽略同源限制，因此可以在每个页面中嵌入一个 iframe 。
+    // 首先在业务页面当中监听iframe发来的消息。
+    window.addEventListener('message', function(e) {
+        // …… do something
+    });
+    // 然后当该页面（称为页面A），要与其他的非同源页面通信时，会先给iframe发送消息。
+    window.frames[0].window.postMessage(mydata, 'http://......');
+    // iframe 收到消息后，会使用某种跨页面消息通信技术在所有 iframe 间同步消息，例如下面使用的 Broadcast Channel：
+    /* iframe 内代码 */
+    const broadcast = new BroadcastChannel('AlienZHOU');
+    // 收到来自页面的消息后，在 iframe 间进行广播
+    window.addEventListener('message', function(e) {
+        broadcast.postMessage(e.data);
+    });
+    // 其他 iframe 收到通知后，则会将该消息同步给所属的页面：
+    /* iframe 内代码 */
+    // 对于收到的（iframe）广播消息，通知给所属的业务页面
+    bc.onmessage = function(e) {
+        window.parent.postMessage(e.data, '*');
+    };
+</script>
