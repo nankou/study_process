@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>盒模型</title>
+</head>
+<body>
+    <div class="container">
+      <div class="content">标准盒子</div>
+      <div class="border">IE盒子</div>
+    </div>
+</body>
+</html>
+<style>
+    .content{
+        box-sizing: content-box; /*设置盒模型为标准模型*/
+        width:100px;
+        height: 100px;
+        padding: 10px;
+        border: 5px solid red;
+        margin: 2px;
+    }
+    .border{
+        box-sizing: border-box; /*设置盒模型为IE模型*/
+        width: 100px;
+        height: 50px;
+        padding: 10px;
+        border: 5px solid red;
+        margin: 15px;
+    }
+</style>
