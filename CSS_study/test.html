@@ -6,36 +6,27 @@
 </head>
 <body>
 <div class="container">
-    <h6>盒子</h6>
-    <p class="one">1111</p>
+    <div class="one">1111</div>
     <div class="two">2</div>
-    <div class="three fourth">
-        <div class="three_one">3.0</div>
-        <div class="three_two">3.1</div>
-        <div class="three_three">
-            <div class="three_three_one">3.2.1</div>
-        </div>
-    </div>
 </div>
 </body>
 </html>
 <style>
-    p:first-letter{color:red;}
-    /**{*/
-    /*    margin: 0;*/
-    /*    padding: 0;*/
-    /*}*/
-
-    /*.three > div{*/
-    /*}*/
-
-    /*[class]{*/
-    /*    !* [属性名] *!*/
-    /*}*/
-    /*[class=one]{*/
-    /*    !* [属性名=属性值] *!*/
-    /*}*/
-    /*[class~=three]{*/
-    /*    !* [属性名~=属性值] *!*/
-    /*}*/
+    .container{
+        border: 5px solid #fcc;
+        width: 400px;
+        overflow: hidden;
+    }
+    .one{
+        width: 100px;
+        height: 100px;
+        background-color: #b8bbaf;
+        float: left;
+    }
+    .two{
+        width: 100px;
+        height: 100px;
+        background-color: #cee3d3;
+        float: left;
+    }
 </style>
