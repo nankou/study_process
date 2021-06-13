@@ -1,45 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <title>CSS测试</title>
-</head>
-<body>
-<div class="container">
-    <div class="one">1</div>
-    <div class="two">2</div>
-    <div class="three">3</div>
-    <div class="four">4</div>
-</div>
-</body>
-</html>
-<style>
-   .container{
-      text-align: center;
-      color: white;
-      height: 2000px;
-   }
-  .one,.two,.three,.four{
-      display: inline-block;
-      margin: 20px;
-      height: 100px;
-      width: 100px;
-      line-height: 100px;
-  }
-  .one{
-      background-color: #6f42c1;
-  }
-  .two{
-      background-color: #0f6674;
-      position: absolute;
-      top: 20px;
-      left: 50px;
-  }
-  .three{
-      background-color: #1e7e34;
-  }
-  .four{
-      background-color: #5a6268;
-  }
+    <style>
+        .container {
+            text-align: center;
+            color: white;
+            height: 200px;
+            width: 200px;
+        }
+        
+        .container {
+            background-color: crimson;
+        }
+    </style>
+    <link rel="stylesheet" type="text/css" href="./style.css">
 
-</style>
+</head>
+
+<body>
+    <div id="box" class="container"></div>
+</body>
+
+</html>

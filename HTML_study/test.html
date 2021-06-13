@@ -15,6 +15,15 @@
             <div class="item2">2</div>
             <div class="item3">3</div>
             <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
+            <div class="item4">4</div>
         </div>
     </div>
 </body>
@@ -22,11 +31,10 @@
 </html>
 <style>
     .box {
-        display: flex;
         height: 1000px;
-        flex-direction: row;
         background-color: thistle;
-        justify-content: space-around;
+        display: flex;
+        flex-wrap: wrap-reverse;
     }
     
     .item1,
@@ -37,11 +45,5 @@
         height: 150px;
         background-color: crimson;
         margin: 10px;
-        flex-shrink: 1;
-    }
-    
-    .item3,
-    .item4 {
-        align-self: flex-end;
     }
 </style>
