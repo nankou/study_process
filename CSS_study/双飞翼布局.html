@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双飞翼布局</title>
+</head>
+
+<!-- 双飞翼布局实现效果 -->
+<!-- 1、目的：两侧内容宽度固定，中间内容宽度自适应 -->
+<!-- 2、三栏布局，中间一栏最先加载、渲染出来 -->
+<!-- 实现方法：float+margin -->
+
+<!-- 靠在中间这层外面套一层div加padding将内容挤出来中间 -->
+
+<body>
+    <div class="header">header</div>
+    <div class="main middle">
+        <div id="main-wrapper">middle</div>
+    </div>
+    <div class="left">left</div>
+    <div class="right">right</div>
+    <div class="footer">footer</div>
+</body>
+
+</html>
+<style>
+    * {
+        margin: 0;
+        padding: 0;
+    }
+    
+    body {
+        /* 设置最小宽度，防止挤压使中间内容消失 */
+        min-width: 600px;
+    }
+    
+    .header {
+        text-align: center;
+        height: 70px;
+        background-color: coral;
+    }
+    
+    .main #main-wrapper {
+        margin-left: 100px;
+        margin-right: 100px;
+    }
+    
+    .left,
+    .middle,
+    .right {
+        float: left;
+    }
+    
+    .left {
+        height: 100px;
+        width: 100px;
+        background-color: darkmagenta;
+        margin-left: -100%;
+    }
+    
+    .right {
+        height: 100px;
+        width: 100px;
+        background-color: darkslategray;
+        margin-left: -100px;
+    }
+    
+    .middle {
+        height: 100px;
+        width: 100%;
+        min-width: 200px;
+        background-color: forestgreen;
+        /* 不能在外层容器里面加padding，否则会使布局乱套 */
+        /* padding-left: 100px;
+        padding-right: 100px; */
+    }
+    
+    .footer {
+        text-align: center;
+        height: 50px;
+        clear: both;
+        background-color: darkgrey;
+    }
+</style>
