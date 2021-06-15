@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>CSS测试</title>
+
+</head>
+
+<body>
+    <a href="#left">选项卡left</a>
+    <a href="#middle">选项卡middle</a>
+    <a href="#right">选项卡right</a>
+    <div id="left">内容left</div>
+    <div id="middle">内容middle</div>
+    <div id="right">内容right</div>
+</body>
+
+</html>
+<style>
+    * {
+        margin: 0;
+        padding: 50px;
+    }
+    
+    a {
+        text-decoration: none;
+        color: indigo;
+        border: 1px gray solid;
+        padding: 10px;
+        margin: 10px;
+    }
+    
+    a:link {
+        color: black;
+    }
+    
+    a:visited {
+        color: gray;
+    }
+    
+    div {
+        width: 275px;
+        height: 200px;
+        background-color: green;
+        display: none;
+        text-align: center;
+        font: 30px/200px "微软雅黑";
+        margin-top: 30px;
+        margin-left: 10px;
+    }
+    
+     :target {
+        display: block;
+    }
+</style>

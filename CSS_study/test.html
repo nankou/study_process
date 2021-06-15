@@ -3,76 +3,90 @@
 
 <head>
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CSS测试</title>
-
 </head>
 
 <body>
-    <div class="header">header</div>
-    <div class="main middle">
-        <div id="main-wrapper">middle</div>
-    </div>
-    <div class="left">left</div>
-    <div class="right">right</div>
-    <div class="footer">footer</div>
+    <!-- <span>可编辑的表单</span>
+    <input id="input1" type="text" />
+    <br/>
+    <span>被禁用的表单</span>
+    <input id="input2" type="text" disabled/>
+    <br/>
+    <span>聚焦的表单</span>
+    <input id="input3" type="text" />
+    <br/>
+    <span>被选中的表单</span>
+    <input id="input4" type="checkbox" />
+    <br/>
+    <br/> -->
+
+    <label>
+      <input type="radio" name="abaaba">
+      <span></span>
+    </label>
+    <label>
+      <input type="radio" name="abaaba">
+      <span></span>
+    </label>
+    <label>
+      <input type="radio" name="abaaba">
+      <span></span>
+    </label>
 </body>
 
 </html>
 <style>
+    /* #input1:enabled {
+        background-color: green;
+    }
+    
+    #input2:disabled {
+        background-color: yellow;
+    }
+    
+    #input3:focus {
+        background-color: pink;
+    }
+    
+    #input4:checked {
+        width: 100px;
+        height: 100px;
+    } */
+    
     * {
         margin: 0;
         padding: 0;
     }
     
-    body {
-        /* 设置最小宽度，防止挤压使中间内容消失 */
-        min-width: 600px;
-    }
-    
-    .header,
-    .footer {
-        background-color: #bbe0e3;
-        height: 100px;
-        border: dimgray 1px solid;
-    }
-    
-    .footer {
-        /* 通过清除底部浮动解决高度塌陷 */
-        clear: both;
-    }
-    
-    .main #main-wrapper {
-        padding-left: 100px;
-        padding-right: 100px;
-    }
-    
-    .content .middle,
-    .left,
-    .right {
-        background-color: #d9d9d9;
-    }
-    
-    .middle {
-        height: 100px;
-        background-color: dimgray;
-        /* 中间列自适应，所以宽度100%继承父元素宽度 */
-        width: 100%;
+    label {
+        /* BFC */
         float: left;
-    }
-    
-    .left {
-        height: 100px;
-        background-color: #d5d50f;
+        position: relative;
         width: 100px;
-        float: left;
-        margin-left: -100%;
+        height: 100px;
+        border: 2px solid;
+        overflow: hidden;
+        border-radius: 50%;
     }
     
-    .right {
-        height: 100px;
-        background-color: #8cca4d;
-        width: 100px;
-        float: left;
-        margin-left: -100px;
+    label>span {
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        right: 0;
+    }
+    
+    input {
+        position: absolute;
+        left: -50px;
+        top: -50px;
+    }
+    
+    input:checked+span {
+        background-color: violet;
     }
 </style>
