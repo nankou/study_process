@@ -9,84 +9,22 @@
 </head>
 
 <body>
-    <!-- <span>可编辑的表单</span>
-    <input id="input1" type="text" />
-    <br/>
-    <span>被禁用的表单</span>
-    <input id="input2" type="text" disabled/>
-    <br/>
-    <span>聚焦的表单</span>
-    <input id="input3" type="text" />
-    <br/>
-    <span>被选中的表单</span>
-    <input id="input4" type="checkbox" />
-    <br/>
-    <br/> -->
+    <div class="container">
+        <img src="../pic.jpg" />
+    </div>
 
-    <label>
-      <input type="radio" name="abaaba">
-      <span></span>
-    </label>
-    <label>
-      <input type="radio" name="abaaba">
-      <span></span>
-    </label>
-    <label>
-      <input type="radio" name="abaaba">
-      <span></span>
-    </label>
 </body>
 
 </html>
 <style>
-    /* #input1:enabled {
-        background-color: green;
-    }
-    
-    #input2:disabled {
-        background-color: yellow;
-    }
-    
-    #input3:focus {
-        background-color: pink;
-    }
-    
-    #input4:checked {
-        width: 100px;
-        height: 100px;
-    } */
-    
     * {
         margin: 0;
         padding: 0;
     }
     
-    label {
-        /* BFC */
-        float: left;
-        position: relative;
+    img {
         width: 100px;
         height: 100px;
-        border: 2px solid;
-        overflow: hidden;
-        border-radius: 50%;
-    }
-    
-    label>span {
-        position: absolute;
-        left: 0;
-        top: 0;
-        bottom: 0;
-        right: 0;
-    }
-    
-    input {
-        position: absolute;
-        left: -50px;
-        top: -50px;
-    }
-    
-    input:checked+span {
-        background-color: violet;
+        margin: 20px;
     }
 </style>
