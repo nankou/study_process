@@ -9,13 +9,13 @@
 </head>
 
 <body>
-    <div class="container">
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
-        <div class="box4"></div>
+    <div id="div1"></div>
+    <div id="div2"></div>
+    <div id="div3">
+        <div id="div4"></div>
+        <div id="div5"></div>
+        <div id="div6"></div>
     </div>
-
 
 </body>
 
@@ -23,43 +23,45 @@
 <style>
     * {
         margin: 0;
-        padding: 0;
     }
     
-    .container {
-        width: 300px;
-        height: 300px;
+    html {
+        padding: 20px;
+        font: 12px/20px Arial, sans-serif;
+    }
+    
+    div {
+        opacity: 0.7;
+        position: relative;
+    }
+    
+    h1 {
+        font: inherit;
+        font-weight: bold;
+    }
+    
+    #div1 {
+        width: 200px;
+        height: 200px;
+        background-color: aqua;
         position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-        margin: auto;
     }
     
-    .container>div {
-        margin: 10px;
-        width: 130px;
-        height: 130px;
-        border: 1px solid;
-        float: left;
-        box-sizing: border-box;
+    #div2 {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(234, 0, 255);
+        margin-left: 50px;
+        position: absolute;
+        z-index: 1;
     }
     
-    .box1,
-    .box4 {
-        background-color: pink;
-        border-radius: 0 50%;
-    }
-    
-    .box2,
-    .box3 {
-        background-color: brown;
-        border-radius: 50% 0;
-    }
-    
-    .container:hover {
-        transform: rotate(180deg);
-        transition: 2s;
+    #div3 {
+        width: 200px;
+        height: 200px;
+        background-color: rgb(255, 187, 0);
+        margin-left: 100px;
+        position: absolute;
+        z-index: 2;
     }
 </style>
