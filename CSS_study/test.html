@@ -9,13 +9,16 @@
 </head>
 
 <body>
-    <div id="div1"></div>
-    <div id="div2"></div>
+
+    <div id="div1">
+        <h1 class="child"></h1>
+    </div>
+    <!-- <div id="div2"></div>
     <div id="div3">
         <div id="div4"></div>
         <div id="div5"></div>
         <div id="div6"></div>
-    </div>
+    </div> -->
 
 </body>
 
@@ -35,33 +38,17 @@
         position: relative;
     }
     
-    h1 {
-        font: inherit;
-        font-weight: bold;
+    #div1 {
+        width: 500px;
+        height: 500px;
+        background-color: bisque;
     }
     
-    #div1 {
+    .child {
+        font-size: 30px;
         width: 200px;
         height: 200px;
         background-color: aqua;
-        position: absolute;
-    }
-    
-    #div2 {
-        width: 200px;
-        height: 200px;
-        background-color: rgb(234, 0, 255);
-        margin-left: 50px;
-        position: absolute;
-        z-index: 1;
-    }
-    
-    #div3 {
-        width: 200px;
-        height: 200px;
-        background-color: rgb(255, 187, 0);
-        margin-left: 100px;
-        position: absolute;
-        z-index: 2;
+        margin: 0 auto;
     }
 </style>
