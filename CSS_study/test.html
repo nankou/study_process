@@ -10,14 +10,14 @@
 
 <body>
 
-    <div id="div1">
-        <h1 class="child"></h1>
+    <div id="box">
+        <img src="./flower.png">
     </div>
-    <!-- <div id="div2"></div>
-    <div id="div3">
-        <div id="div4"></div>
-        <div id="div5"></div>
-        <div id="div6"></div>
+    <!-- <div id="parent">
+        <div id="child1">
+            我是一个图片
+            <img src="./flower.png" /> 图片是花
+        </div>
     </div> -->
 
 </body>
@@ -35,20 +35,22 @@
     
     div {
         opacity: 0.7;
-        position: relative;
     }
     
-    #div1 {
-        width: 500px;
-        height: 500px;
-        background-color: bisque;
+    #box {
+        width: 100px;
+        height: 100px;
     }
     
-    .child {
-        font-size: 30px;
+    img {
+        width: 100px;
+        height: 100px;
+    }
+    
+    img:hover {
         width: 200px;
         height: 200px;
-        background-color: aqua;
-        margin: 0 auto;
+        margin-left: 200px;
+        animation-name: sliding-vertically;
     }
 </style>
