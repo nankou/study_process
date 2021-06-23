@@ -9,39 +9,44 @@
 </head>
 
 <body>
-
-    <!-- <div id="box">
-        <div> animation-timing-function: ease;</div>
+    <div id="box">
+        <div>transition-delay:0s;</div>
         <img class="flower1" src="./flower.png">
     </div>
     <div id="box">
-        <div>animation-timing-function: ease-in;</div>
+        <div>transition-delay:1s;</div>
         <img class="flower2" src="./flower.png">
     </div>
     <div id="box">
-        <div>animation-fill-mode: none;</div>
+        <div>transition-delay:2s;</div>
         <img class="flower3" src="./flower.png">
     </div>
-    <div id="box">
-        <div>animation-fill-mode: forwards;</div>
+    <!-- <div id="box">
+        <div>transition-timing-function: ease-in-out</div>
         <img class="flower4" src="./flower.png">
     </div>
     <div id="box">
-        <div>animation-play-state: running;</div>
+        <div>transition-timing-function: linear</div>
         <img class="flower5" src="./flower.png">
     </div>
     <div id="box">
-        <div>animation-fill-mode: both;</div>
+        <div>transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1)</div>
         <img class="flower6" src="./flower.png">
-    </div> -->
-    <div id="love">
-        <img class="myLove" src="./love.png" />
     </div>
-    <!-- <div id="parent">
-        <div id="child1">
-            我是一个图片
-            <img src="./flower.png" /> 图片是花
-        </div>
+    <div id="box">
+        <div>transition-timing-function: step-start</div>
+        <img class="flower7" src="./flower.png">
+    </div>
+    <div id="box">
+        <div>transition-timing-function: step-end</div>
+        <img class="flower8" src="./flower.png">
+    </div>
+    <div id="box">
+        <div>transition-timing-function: steps(4, end)</div>
+        <img class="flower9" src="./flower.png">
+    </div> -->
+    <!-- <div id="love">
+        <img class="myLove" src="./love.png" />
     </div> -->
 
 </body>
@@ -58,7 +63,7 @@
     }
     
     div {
-        /* opacity: 0.7; */
+        opacity: 0.7;
     }
     
     #box {
@@ -72,69 +77,85 @@
     .flower3,
     .flower4,
     .flower5,
-    .flower6 {
+    .flower6,
+    .flower7,
+    .flower8,
+    .flower9 {
         width: 50px;
         height: 50px;
-        animation-name: myAnimation;
-        animation-duration: 5s;
         position: relative;
     }
     
-    .flower1 {
-        animation-timing-function: ease;
+    .flower1:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-delay: 0s;
     }
     
-    .flower2 {
-        animation-timing-function: ease-in;
+    .flower2:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-delay: 1s;
     }
     
-    .flower3 {
-        animation-timing-function: linear;
-        animation-iteration-count: 2;
-        animation-fill-mode: none;
-        animation-delay: 2s;
+    .flower3:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-delay: 2s;
     }
     
-    .flower4 {
-        animation-timing-function: linear;
-        animation-iteration-count: 2;
-        animation-fill-mode: forwards;
-        animation-delay: 2s;
-    }
-    
-    .flower5 {
-        animation-timing-function: linear;
-        animation-iteration-count: 2;
-        animation-fill-mode: backwards;
-        animation-play-state: running;
+    .flowe4:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: ease-in-out
     }
     
     .flower5:hover {
-        animation-play-state: paused;
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: linear
     }
     
-    .flower6 {
-        animation-timing-function: linear;
-        animation-iteration-count: 2;
-        animation-fill-mode: both;
-        animation-delay: 2s;
+    .flower6:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: cubic-bezier(0.1, 0.7, 1.0, 0.1)
     }
-    /*     
+    
+    .flower7:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: step-start
+    }
+    
+    .flower8:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: step-end
+    }
+    
+    .flower9:hover {
+        width: 100px;
+        height: 100px;
+        transition-duration: 2s;
+        transition-timing-function: steps(4, end)
+    }
+    /*  
+     
     img:hover {
         width: 200px;
         height: 200px;
         margin-left: 200px;
        
     } */
-    
-    @keyframes myAnimation {
-        0% {
-            left: 0px;
-        }
-        100% {
-            left: 300px;
-        }
-    }
     
     #love {
         width: 100px;
@@ -146,48 +167,4 @@
         right: 0;
         margin: auto;
     }
-    
-    img {
-        width: 100px;
-        height: 100px;
-        animation-name: myLove;
-        animation-duration: 2s;
-        animation-iteration-count: 2;
-    }
-    
-    @keyframes myLove {
-        0% {
-            width: 100px;
-            height: 100px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-        50% {
-            width: 200px;
-            height: 200px;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-        100% {
-            width: 100px;
-            height: 100px;
-            margin: auto;
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            margin: auto;
-        }
-    }
-    
-    .myLove {}
 </style>
