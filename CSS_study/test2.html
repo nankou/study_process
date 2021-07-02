@@ -12,18 +12,41 @@
             margin: 0;
         }
         
-        img {
-            width: 200px;
+        html,
+        body {
+            height: 100%;
+            overflow: hidden;
+            /* background-color: black; */
+        }
+        
+        #test {}
+        
+        #test>.box {
+            margin: 100px auto;
             height: 200px;
-            -webkit-box-reflect: below 0 linear-gradient(transparent, white);
+            width: 300px;
+            border: 1px gray solid;
+            background-image: radial-gradient(circle, yellow, green);
         }
     </style>
 </head>
 
 <body>
     <div id="test">
-        <img src="./love.png">
+        <div class="box"></div>
     </div>
+
 </body>
+<script>
+    // var h1 = document.querySelector('h1')
+    // var flag = -200
+    // setInterval(() => {
+    //     flag += 4
+    //     if (flag == 500) {
+    //         flag = -200 // 重新滑动
+    //     }
+    //     h1.style.backgroundPositionX = flag + "px"
+    // }, 10);
+</script>
 
 </html>
