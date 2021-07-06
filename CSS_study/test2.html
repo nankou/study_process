@@ -19,34 +19,68 @@
             /* background-color: black; */
         }
         
+        body {
+            min-width: 600px;
+        }
+        
         #test {}
         
-        #test>.box {
-            margin: 100px auto;
-            height: 200px;
-            width: 300px;
-            border: 1px gray solid;
-            background-image: radial-gradient(circle, yellow, green);
+        .header {
+            height: 100px;
+            background-color: aqua;
+        }
+        
+        .content {
+            background-color: beige;
+            overflow: hidden;
+        }
+        
+        .content>.middle {
+            width: 100%;
+            background-color: gold;
+            float: left;
+        }
+        
+        .wrap {
+            padding-left: 100px;
+        }
+        
+        .content>.left {
+            width: 100px;
+            background-color: darkblue;
+            float: left;
+            margin-left: -100%;
+        }
+        
+        .content>.right {
+            width: 100px;
+            background-color: red;
+            float: left;
+            margin-left: -100px;
+        }
+        
+        .footer {
+            height: 100px;
+            background-color: coral;
         }
     </style>
 </head>
 
 <body>
     <div id="test">
-        <div class="box"></div>
+        <div class="header"></div>
+        <div class="content">
+            <div class="middle">
+                <div class="wrap">中间</div>
+            </div>
+            <div class="left">左边</div>
+            <div class="right">右边</div>
+        </div>
+        <div class="footer"></div>
     </div>
 
 </body>
 <script>
-    // var h1 = document.querySelector('h1')
-    // var flag = -200
-    // setInterval(() => {
-    //     flag += 4
-    //     if (flag == 500) {
-    //         flag = -200 // 重新滑动
-    //     }
-    //     h1.style.backgroundPositionX = flag + "px"
-    // }, 10);
 </script>
 
 </html>
