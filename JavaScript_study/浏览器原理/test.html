@@ -229,20 +229,37 @@
 
     // MoreThanHalfNum_Solution([1, 2, 3, 2, 2, 2, 5, 4, 2])
 
-    function FindGreatestSumOfSubArray(array) {
-        // write code here
-        let newArray = [];
-        var result = 0
-        for (let i = 0; i < array.length; i++) {
-            if (array[i] > 0) {
-                newArray.push(array[i])
-            }
-        }
-        newArray.forEach(item => {
-            result = result + item
-        })
-        console.log(result);
-    }
+    // function FindGreatestSumOfSubArray(array) {
+    //     // write code here
+    //     let newArray = [];
+    //     var result = 0
+    //     for (let i = 0; i < array.length; i++) {
+    //         if (array[i] > 0) {
+    //             newArray.push(array[i])
+    //         }
+    //     }
+    //     newArray.forEach(item => {
+    //         result = result + item
+    //     })
+    //     console.log(result);
+    // }
 
-    FindGreatestSumOfSubArray([1, -2, 3, 10, -4, 7, 2, -5])
+    // FindGreatestSumOfSubArray([1, -2, 3, 10, -4, 7, 2, -5])
+    var moveZeroes = function(nums) {
+        let j = 0;
+        for (let i = 0; i < nums.length; i++) {
+            if (nums[j] === 0) {
+                // 把0去掉
+                nums.splice(j, 1)
+                    // 在最末尾加一个0
+                nums[nums.length] = 0
+            } else {
+                j++
+            }
+
+        }
+    };
+    let nums = [0, 1, 0, 3, 12];
+    moveZeroes(nums)
+    console.log(nums)
 </script>
