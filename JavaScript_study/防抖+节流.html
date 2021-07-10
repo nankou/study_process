@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖和节流</title>
+</head>
+
+<body>
+    <!-- 防抖函数 -->
+    <!-- 当持续触发时间，一定时间内没有再触发事件，事件处理函数才会执行一次 -->
+    <!-- 如果设定的时间到来之前，又一次触发了事件，就重新开始延时  -->
+    <!-- 使用防抖函数~优化不断触发的窗口变化， -->
+    <!-- 例子：输入框的实时监听 -->
+    <input type="text" id="input">
+    <!-- 节流函数 -->
+    <!-- 实现性能较好的懒加载 ，一段时间内只做一件事情-->
+    <button id="button">点击（节流）</button>
+
+    <script>
+        // 当触发该事件时，先清除定时器
+        function debounce(fun, delay) {
+            let timer
+            return function(args) {
+                clearInterval(timer)
+                timer = setTimeout(function() {
+                    fun(args)
+                }, delay)
+            }
+        }
+
+        function inputFun(value) {
+            console.log('你输出的结果是' + value)
+        }
+        const input = document.getElementById("input")
+        const debounceInput = debounce(inputFun, 500)
+            // 监听Input框的输入
+        input.addEventListener('keyup', function(e) {
+            debounceInput(e.target.value)
+        })
+
+        // 节流函数
+        function throttle(func, wait) {
+            let timerOut
+            return function() {
+                if (!timerOut) {
+                    timerOut = setTimeout(function() {
+                        timerOut = null
+                        func()
+                    }, wait)
+                }
+            }
+        }
+
+        function handle() {
+            console.log(Math.random())
+        }
+        document.getElementById('button').onclick = throttle(handle, 2000)
+
+        // 例子三：滚动条监听
+        // 监听浏览器滚动事件，返回当前滚动条与顶部的距离
+        // 原始滚动条滚动监听位置代码
+        // 需求：如果用户一直拖着滚动条不松手，在一定间隔内让他定期输出滚动条位置
+        // 实现：可以应用节流代码
+        function throttle(fn, delay) {
+            let valid = true
+            return function() {
+                if (!valid) {
+                    // 休息时间 暂不接客
+                    return false
+                }
+                // 工作时间， 执行函数并且在间隔期内吧状态位设为无效
+                valid = false
+                setTimeout(() => {
+                    fn()
+                    valid = true;
+                }, delay)
+            }
+        }
+
+        function showTop() {
+            var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+            console.log('滚动条位置' + scrollTop)
+        }
+        window.onscroll = throttle(showTop, 1000)
+    </script>
+</body>
+
+</html>
