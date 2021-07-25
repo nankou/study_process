@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var longestPalindrome = function(s) {
+        if (s.length === 1) return s;
+        let maxRes = 0; // 最长回文长度
+        let maxStr = ''; // 最长回文字符串
+        for (let i = 0; i < s.length; i++) {
+            // 回文串长度有可能是奇数，也有可能是偶数
+            let str1 = palindrome(s, i, i);
+            let str2 = palindrome(s, i, i + 1);
+            // 判断哪个是最长的回文字符串
+            if (str1.length > maxRes) {
+                maxStr = str1;
+                maxRes = str1.length;
+            }
+            if (str2.length > maxRes) {
+                maxStr = str2;
+                maxRes = str2.length;
+            }
+        }
+        return maxStr;
+    };
+    // 比较两边的值是否相同
+    function palindrome(s, l, r) {
+        // 两边的指针比较，如果相等继续移动
+        while (l >= 0 && r < s.length && s[l] === s[r]) {
+            l--;
+            r++;
+        }
+        return s.slice(l + 1, r)
+    }
+</script>
+
+</html>
