@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var findRepeatNumber = function(nums) {
+        // // 方法一: 哈希集合,记录每个字符是否出现过
+        // const ans = new Set();
+        // for (let i = 0; i < nums.length; i++) {
+        //     if (ans.has(nums[i])) {
+        //         // return nums[i]
+        //         console.log(nums[i])
+        //     } else {
+        //         ans.add(nums[i]);
+        //     }
+        // }
+        // // return -1;
+        // console.log(-1)
+
+        // 方法二: 原地交换
+        if (nums.length <= 1) console.log(-1);;
+        // 刚开始的值
+        let i = 0;
+        while (i < nums.length) {
+            if (nums[i] == i) {
+                i++;
+                continue;
+            } else if (nums[nums[i]] == nums[i]) {
+                return nums[i]
+            } else {
+                // 原地交换
+                let temp = nums[i];
+                nums[i] = nums[temp];
+                nums[temp] = temp;
+            }
+        }
+        return -1;
+        // for (let i = 0; i < nums.length; i++) {
+        //     if (nums[nums[i]] == nums[i]) {
+        //         console.log(nums[i]);
+        //     } else if (nums[i] != i) {
+        //         let temp = nums[i];
+        //         nums[i] = nums[temp];
+        //         nums[temp] = temp;
+        //     }
+        // }
+        // console.log(-1);
+    };
+    let nums = [2, 3, 4, 5, 6];
+    findRepeatNumber(nums);
+</script>
+
+</html>
