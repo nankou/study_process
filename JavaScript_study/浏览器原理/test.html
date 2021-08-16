@@ -8,7 +8,7 @@
     <title>Document</title>
 </head>
 
-<body>
+<body onclick="myclick">
 
 </body>
 
@@ -339,17 +339,157 @@
 
     // console.log(res);
 
-    // 通过快慢指针寻找链表中点。
-    function findCenter(head) {
-        let slower = head;
-        let faster = head;
-        if (head == null || head.next == null) {
-            return head;
-        }
-        while (faster.next && faster.next.next != null) {
-            slower = slower.next;
-            faster = faster.next.next;
-        }
-        return slower;
-    }
+    // 面试题1
+    // for (let i = 0; i < 3; i++) {
+    //     document.body.addEventListener('click', function() {
+    //         console.log(i)
+    //     })
+    // }
+
+    // // 面试题2
+    // var x = 10;
+
+    // function a(y) {
+    //     var x = 20;
+    //     return b(y);
+    // }
+
+    // function b(y) {
+    //     console.log(x + y)
+    // }
+    // a(20); //打印出30
+
+    // // 面试题3
+    // var x = 10;
+
+    // var obj = {
+    //     x: 20,
+    //     y: function() {
+    //         return x;
+    //     }
+    // }
+    // obj.y();
+    // var xxx = obj.y;
+    // xxx();
+
+    // // 面试题4
+    // // 'get-element-by-id' -> 'getElementById'
+    // function transform(str) {
+    //     var str1 = str.replace(/-(\w)/g, function() {
+    //         return arguments[1].toUpperCase()
+    //     })
+    //     return str1;
+    // }
+    // var str = 'get-element-by-id';
+    // console.log(transform(str));
+
+    // // 面试题5 
+    // function repeat() {
+    //     /* TODO */
+    // }
+    // const repeatFunc = repeat(console.log, 4, 1000);
+    // repeatFunc('helloworld');
+    // repeatFunc('helloworld2');
+
+    /*
+     *需求： 每一秒打印一个helloworld/helloworld2，总共执行4次
+     * helloworld
+     * helloworld2
+     * helloworld
+     * helloworld2
+     * helloworld
+     * helloworld2
+     * helloworld
+     * helloworld2
+     */
+
+    // const myMap = function(fn) {
+    //         const arr = this;
+    //         return arr.reduce((pre, cur, index, arr) => {
+    //             pre.push(fn.call(this, cur, index, arr))
+    //             return pre;
+    //         }, [])
+    //     }
+    //     // 打印结果
+    // Array.prototype.Map = myMap;
+    // var arr1 = [1, 2, 3];
+    // let arrMap = arr1.Map(function(x) {
+    //     return x * 2;
+    //     console.log(x * 2)// 2,4,6
+    // })
+
+    // const fn = function(arr) {
+    //     let res = [];
+    //     for (let i = 0; i < arr.length; i++) {
+    //         let item = arr[i];
+    //         if (Array.isArray(arr[i])) {
+    //             res = res.concat(fn(arr[i]))
+    //         } else {
+    //             res.push(item)
+    //         }
+    //     }
+    //     return res;
+    // }
+    // console.log(fn(arr2));
+
+    // 原型链
+    // Object.prototype.a = 'Object';
+    // Function.prototype.a = 'Function';
+
+    // function Person() {};
+    // var child = new Person();
+    // console.log(Person.a);
+    // console.log(child.a);
+
+    // console.log('script start');
+
+    // setTimeout(function() {
+    //     console.log('setTimeout');
+    // }, 0);
+
+    // Promise.resolve().then(function() {
+    //     console.log('promise1');
+    // }).then(function() {
+    //     console.log('promise2');
+    // });
+
+    // console.log('script end');
+    // console.log('script start');
+
+    // setTimeout(function() {
+    //     console.log('timeout1');
+    // }, 10);
+
+    // new Promise(resolve => {
+    //     console.log('promise1');
+    //     resolve();
+    //     setTimeout(() => console.log('timeout2'), 10);
+    // }).then(function() {
+    //     console.log('then1')
+    // })
+
+    // console.log('script end');
+
+    // var a = 10;
+
+    // function fn() {
+    //     a++;
+    //     console.log(a);
+    //     var a = 5;
+
+    // }
+    // fn(); // 5
+    // console.log(a); // 10
+
+    // let x = 5;
+
+    // function fn(x) {
+    //     return function(y) {
+    //         console.log(y + (++x));
+    //     }
+
+    // }
+    // let f = fn(6);
+    // f(7);
+    // console.log(x);
 </script>

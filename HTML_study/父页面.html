@@ -10,13 +10,17 @@
 
 <body>
     <!-- <button onclick="toOpen()">打开子页面</button> -->
-    <a href='./子页面.html' target="_blank">子页面.html</a>
-    <p id="childModify">default</p>
+    <!-- <a href='./子页面.html' target="_blank">子页面.html</a>
+    <p id="childModify">default</p> -->
 </body>
 
 </html>
 <script>
-    function toOpen() {
-        window.open('./子页面.html')
+    let a = 10
+
+    function fn() {
+        console.log(a)
+        let a = 20
     }
+    fn()
 </script>
