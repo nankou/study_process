@@ -56,8 +56,18 @@
     //         //如果为两个参数，sKey存在，则返回值或数组，否则返回空字符。
     // }
     var url = "http://bytedance.com:3000/p1/p2?a=b&c=d"
-    console.log(JSON.stringify(parse(url)));
-    console.log(JSON.stringify(getUrlParam(url)));
+        // console.log(JSON.stringify(parse(url)));
+        // console.log(JSON.stringify(getUrlParam(url)));
+    console.log('foo' == new function() {
+        return String('foo');
+    });
+    console.log('foo' == new function() {
+        return new String('foo');
+    });
+    console.log([] == 0);
+    console.log(![]);
+    console.log(!0);
+    // console.log();
 </script>
 
 </html>
