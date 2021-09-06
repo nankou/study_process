@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组扁平化</title>
+</head>
+
+<body>
+    <h6>数组扁平化的意思</h6>
+    <h6>将一个多维数组拍平，变成一个一维数组</h6>
+</body>
+<script>
+    // 直接使用flat函数
+    let arr = [1, [2, [3, [4, 5]]], 6];
+    const res1 = arr.flat(Infinity);
+    console.log(res1);
+
+
+    // 使用reduce
+    const flatten = arr => {
+        return arr.reduce((pre, cur) => {
+            return pre.concat(Array.isArray(cur) ? flatten(cur) : cur);
+        }, [])
+    }
+    const res2 = flatten(arr);
+    console.log(res2);
+
+    // 函数递归
+    const res3 = [];
+    const fn = arr => {
+        for (let i = 0; i < arr.length; i++) {
+            if (Array.isArray(arr[i])) { // 判断原数组的某一项是否也为数组
+                fn(arr[i]) // 递归调用
+            } else {
+                res3.push(arr[i])
+            }
+        }
+    }
+    fn(arr);
+    console.log(res3);
+
+    // 使用js自带函数split
+    const res4 = arr.toString().split(',').map(Number)
+    console.log(res4);
+
+    // 通过传入参数控制扁平的深度
+    function flat(arr, num) {
+        if (num < 0) return arr.slice(); // 判断深度是否大于0
+        return arr.reduce((pre, cur) => {
+            return pre.concat(Array.isArray(cur) ? flat(cur, num - 1) : cur)
+        }, []);
+    }
+    console.log(flat(arr, 3));
+
+
+    // 自己实现flat函数，传入参数：数组，深度
+    Array.prototype.myFlat = function(n) {
+        if (typeof n == 'number') {
+            if (n == 0) {
+                return this;
+            } else {
+                let flag = true;
+                let newArr = [];
+                for (let i = 0; i < this.length; i++) {
+                    if (this[i] instanceof Array) {
+                        newArr.push(...this[i]);
+                        flag = false;
+                    } else {
+                        newArr.push(this[i])
+                    }
+                }
+                if (n < 0 || flag) {
+                    return this;
+                } else {
+                    --n;
+                    newArr = newArr.myFlat(n);
+                    return newArr;
+                }
+            }
+        }
+    }
+    console.log(arr.myFlat(3));
+</script>
+
+</html>
