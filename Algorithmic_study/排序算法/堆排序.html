@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>堆排序</title>
+</head>
+
+<body>
+    <h6>堆排序</h6>
+    <h6>将待排序列构造成一个大顶堆（小顶堆），整个序列的最大值（最小值）就是堆顶的根节点， </h6>
+    <h6> 将根节点的值和堆数组的末尾进行交换，此时末尾元素就是最大值，然后将剩余的n-1个序列重新构造成一个堆，</h6>
+    <h6> 就会得到n个元素中的次大值，如此反复。</h6>
+</body>
+<script>
+    var len;
+    var heapSort = function(nums) {
+        buildMaxHeap(nums);
+        for (var i = nums.length - 1; i > 0; i--) {
+            swap(nums, 0, i);
+            len--;
+            heapify(nums, 0)
+        }
+        return nums;
+    };
+    // 建立大顶堆
+    function buildMaxHeap(nums) {
+        len = nums.length;
+        for (var i = Math.floor(len / 2); i >= 0; i--) {
+            heapify(nums, i)
+        }
+    };
+    // 堆调整
+    function heapify(nums, i) {
+        var left = 2 * i + 1,
+            right = 2 * i + 2,
+            largest = i;
+        if (left < len && nums[left] > nums[largest]) {
+            largest = left;
+        }
+        if (right < len && nums[right] > nums[largest]) {
+            largest = right;
+        }
+        if (largest != i) {
+            swap(nums, i, largest);
+            heapify(nums, largest);
+        }
+    }
+    // 交换操作
+    function swap(nums, i, j) {
+        var temp = nums[i];
+        nums[i] = nums[j];
+        nums[j] = temp;
+    }
+
+    let test3 = [5, 3, 2, 1, 4];
+    let res = heapSort(test3);
+    console.log(res);
+</script>
+
+</html>
