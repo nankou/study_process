@@ -18,8 +18,20 @@
         
     function  Person()  {};    
     var  child  =  new  Person();    
-    console.log(Person.a);    
-    console.log(child.a);
+    console.log(Person.a);     // Function
+    console.log(child.a); // Object
+
+
+    // 创建一个函数
+    function Person() {
+
+    }
+    console.log(Person.prototype); // 指向原型对象（显示原型对象）
+    // new一个函数
+    var person1 = new Person(); // 生成一个实例对象
+    // 每一个实例对象身上都有一个属性__proto__，该属性指向当前实例对象的原型对象（隐式原型对象）
+    // 构造函数的显示原型对象 === 当前构造函数实例对象的隐式原型对象，也就是：
+    console.log(Person.prototype === person1.__proto__); // true
 </script>
 
 </html>

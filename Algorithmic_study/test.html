@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>算法测试文件</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var balancedStringSplit = function(s) {
+        let ans = 0; // 表示得到的平衡字符串的数量
+        let sta = [];
+        for (let i = 0; i < s.length; i++) {
+            console.log(i);
+            if (sta.length === 0 || s[i] === sta[sta.length - 1]) {
+                sta.push(s[i])
+            } else {
+                sta.pop()
+            }
+            if (sta.length === 0) {
+                ans++
+            }
+        }
+        return ans;
+    };
+    let s = "RLLLLRRRLR";
+    console.log(balancedStringSplit(s));
+</script>
+
+</html>

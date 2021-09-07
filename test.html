@@ -26,4 +26,10 @@
     // }
     //
     // fn(num)
+    var largestNumber = function(nums) {
+        var newArr = nums.sort();
+        return newArr.reverse().join('');
+    };
+    let nums = [3, 30, 34, 5, 9];
+    console.log(largestNumber(nums));
 </script>
