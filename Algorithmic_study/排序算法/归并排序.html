@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>归并排序</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var mergeSort = function(nums) {
+        var len = nums.length;
+        if (len < 2) {
+            return nums;
+        }
+        var middle = Math.floor(len / 2);
+        var left = nums.slice(0, middle);
+        var right = nums.slice(middle);
+        return merge(mergeSort(left), mergeSort(right));
+    };
+
+    function merge(left, right) {
+        console.log(left + " " + right);
+        var res = [];
+        while (left.length && right.length) {
+            if (left[0] <= right[0]) {
+                res.push(left.shift())
+            } else {
+                res.push(right.shift())
+            }
+        }
+        while (left.length)
+            res.push(left.shift());
+
+        while (right.length)
+            res.push(right.shift());
+        return res;
+    }
+
+    let nums = [5, 2, 3, 1];
+    console.log(mergeSort(nums));
+</script>
+
+</html>
