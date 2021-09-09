@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包</title>
+</head>
+
+<body>
+    <button>测试一</button>
+    <button>测试二</button>
+    <button>测试三</button>
+</body>
+<script>
+    var btns = document.getElementsByTagName('button');
+    var arr = [1, 2, 3, 4];
+    // btns为伪数组，它具备数组的一般特征，可以通过下标取值，还有length属性
+    // 但没有数组的一般方法，比如foreach
+    // console.log(btns);
+    for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        // onclick是事件回调，所以不是立即执行，for循环直接执行。所以等点击的时候i已经变成3了
+        // 简而言之：for循环是同步操作，而点击事件是异步操作。
+        // 赋值给onclick的使闭包，三个闭包共享了同一个词法作用域，循环在事件循环之前早已经执行完毕。
+        btn.onclick = function() {
+            console.log(i); // 结果：不管点击哪个按钮，都是3
+        }
+    }
+
+    // 想要点击一次执行一次
+    // 解决办法：用闭包解决，当立即执行函数执行完毕之后，作用域销毁，但是点击的时候仍然能够访问到变量i
+    // 也就是内部变量依然能够访问到
+    for (var i = 0; i < btns.length; i++) {
+        var btn = btns[i];
+        // 立即执行函数
+        (function(i) {
+            btn.onclick = function() {
+                console.log(i); // 结果：点击一次执行一次
+            }
+        })(i)
+    }
+
+    // a++和++a的区别
+    // var a = 1;
+    // console.log(a++); // a=2; a++ = 1;
+    // console.log(++a); // a=3;++a=3;
+    // console.log(a++); // a=4;a++=3
+    // console.log(a); // a=4;
+
+    function fun() {
+        var num = 123;
+        // 函数嵌套
+        return function fun2() {
+                // 内部函数引用外部函数的变量
+                console.log(num);
+            }
+            // fun2()
+    }
+    // var 一个fun2来接收这个函数
+    var fun2 = fun()
+    console.log('----');
+    fun2(); // 结果：打印出123 ，也就是说在外部也能访问到函数里面本来应该被销毁的变量
+    fun2 = null;
+</script>
+
+</html>

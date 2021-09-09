@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>闭包面试题</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 面试题一：
+    var x = 10;
+
+    function fn() {
+        console.log(x);
+    }
+
+    function show(f) {
+        var x = 20;
+        f();
+    }
+    show(fn); // 10
+
+    // 面试题二：
+    var  x  =  10; 
+    function  a(y)  {        
+        var  x  =  20;        
+        return  b(y);    
+    }    
+    function  b(y)  {        
+        console.log(x  +  y)    
+    }    
+    a(20); // 30
+
+    // 面试题三：
+    var name = "The Window";
+    var object = {
+        name: "My Object",
+        getNameFunc: function() {
+            return function() {
+                return this.name;
+            }
+        }
+    }
+    console.log(object.getNameFunc()()); // The Window
+
+
+    // 面试题四：
+    var name2 = "The Window";
+    var object2 = {
+        name2: "My Object",
+        getNameFunc: function() {
+            var that = this; // 缓存this的指向，此时指向object2
+            return function() {
+                return that.name2;
+            }
+        }
+    }
+    console.log(object2.getNameFunc()()); // My Object
+
+    // 面试题五
+    var num = 123;
+
+    function fun2() {
+        console.log(num); // 123
+    }
+    console.log(fun2()); // undefined ， 因为 打印fun2()就是打印fun2()的返回值，默认return undefined
+
+    // 面试题六
+    function fun() {
+        // console.log(1)其实就是XXX.log(1)，也是一个函数，属性是log，传入参数1
+        return console.log(1); // 1
+    }
+    console.log(fun()); // undefined
+
+    console.log('----------');
+
+
+    // 面试题七
+    function fun(n, o) {
+        console.log(o);
+        return {
+            fun: function(m) {
+                return fun(m, n)
+            }
+        }
+    }
+    var a = fun(0); // undefined,a=fun:function,a里面有一个闭包{n:0}
+    a.fun(1); // 0 , m=1,n=0;
+    a.fun(2); // 0 , m=2,n=0;
+    a.fun(3); // 0 , m=3,n=0;
+
+
+    var b = fun(0).fun(1).fun(2).fun(3); // undefined,0,1,2
+    // fun(0)的时候打印undefined，此时n=0;返回的是fun:function(m){...}
+    // fun(0).fun(1)的时候调用里面的fun,此时的闭包变了，n=1;
+    // fun(0).fun(1).fun(2)的时候，n=2;
+    // fun(0).fun(1).fun(2).fun(3)的时候，n=3;
+
+
+    var c = fun(0).fun(1); // undefined,0
+    c.fun(2); // 1 
+    c.fun(3); // 1
+
+    console.log('----------面试题八--------');
+    // 面试题八
+    function Foo() {
+        getName = function() {
+            console.log(1)
+        }
+        return this;
+    }
+    Foo.getName = function() {
+        console.log(2)
+    }
+    Foo.prototype.getName = function() {
+        console.log(3)
+    };
+    var getName = function() {
+        console.log(4)
+    };
+
+    function getName() {
+        console.log(5)
+    }
+
+    // 写出下面的输出结果
+    Foo.getName(); // 对象调用，直接看第二个,2
+    getName(); // 全局调用，getName方法调用，直接是4
+    Foo().getName(); // 函数Foo的getName方法执行，也就是1;而此时函数里面的return this,表示将getName函数上升到全局，也就是全局的getName打印出1了
+    getName(); // 承接上一步，此时全局的getName打印出1
+    new Foo.getName(); // 调用，打印出2
+    new Foo().getName(); // 找离new最近的那个小括号，也就是Foo(),那么new Foo()的结果就是实例对象，构造函数里面没有，那么就去找原型对象，也就是3
+    new new Foo().getName(); // 打印出3，首先是new Foo()执行，也就是 new function() {console.log(3)};最终结果也是3
+
+    // 2 4 1 1 2 3 3
+</script>
+
+</html>

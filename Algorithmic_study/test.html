@@ -12,24 +12,39 @@
 
 </body>
 <script>
-    var balancedStringSplit = function(s) {
-        let ans = 0; // 表示得到的平衡字符串的数量
-        let sta = [];
-        for (let i = 0; i < s.length; i++) {
-            console.log(i);
-            if (sta.length === 0 || s[i] === sta[sta.length - 1]) {
-                sta.push(s[i])
-            } else {
-                sta.pop()
+    // var balancedStringSplit = function(s) {
+    //     let ans = 0; // 表示得到的平衡字符串的数量
+    //     let sta = [];
+    //     for (let i = 0; i < s.length; i++) {
+    //         console.log(i);
+    //         if (sta.length === 0 || s[i] === sta[sta.length - 1]) {
+    //             sta.push(s[i])
+    //         } else {
+    //             sta.pop()
+    //         }
+    //         if (sta.length === 0) {
+    //             ans++
+    //         }
+    //     }
+    //     return ans;
+    // };
+    // let s = "RLLLLRRRLR";
+    // console.log(balancedStringSplit(s));
+    var hammingWeight = function(n) {
+        let res = 0;
+        let ans;
+        let temp = n;
+        while (ans != 0) {
+            ans = Math.floor(temp / 2);
+            // console.log(ans);
+            if (temp % 2 === 1) {
+                res++;
             }
-            if (sta.length === 0) {
-                ans++
-            }
+            temp = ans;
         }
-        return ans;
+        return res;
     };
-    let s = "RLLLLRRRLR";
-    console.log(balancedStringSplit(s));
+    console.log(hammingWeight(4294967293));
 </script>
 
 </html>
