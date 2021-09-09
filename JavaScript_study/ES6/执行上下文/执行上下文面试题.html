@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>执行上下文</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 1、全局执行上下文
+    // var a = 123;
+    // var bar = function(x) { //2、创建bar的全局上下文
+    //     var b = 5;
+    //     foo(x + b)
+    // }
+    // var foo = function(y) { //3、创建foo的执行上下文
+    //     var c = 5;
+    //     console.log(a + c + y);
+    // }
+    // bar(10)
+
+
+    // 测试题一
+    console.log('global begin:' + i);
+    var i = 1;
+    foo(1);
+
+    function foo(i) {
+        if (i == 4) {
+            return;
+        }
+        console.log('foo() begin:' + i);
+        foo(i + 1);
+        console.log('foo() end:' + i);
+
+    }
+    console.log('global end:' + i);
+
+    // undefined 1 2 3 3 2 1 1 
+
+    // 测试题二: function 和 var 预解析 最终是function
+    console.log(typeof a); // function
+    function a() {}
+    var a;
+
+
+    // 测试题三： 首先预解析了b  var b;然后由于b是window的一个属性，所以不执行if里面的语句
+    if (!(b in window)) {
+        var b = 1;
+    }
+    console.log(b); // undefined
+
+
+    // 测试题四：预解析完之后，c为function；
+    var c = 1; // c=1;此时function不调用，c(2)就会报错
+
+    function c(c) {
+        console.log(c);
+        var c = 3;
+    }
+    c(2); // 报错
+</script>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>作用域</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 1、全局作用域
+    var num = 1;
+
+    function fun() {
+        // 2、局部作用域fun
+        var num = 2;
+        fun2();
+    }
+
+    function fun2() {
+        // 3、局部作用域fun2
+        console.log(num);
+    }
+    fun()
+
+
+    // 测试题一
+    var x = 10;
+
+    function fn() {
+        console.log(x);
+    }
+
+    function show(f) {
+        var x = 20;
+        f();
+    }
+    show(fn) // 10
+
+    // 测试题二
+    var fn = function() {
+        console.log(fn); // f(){console.log(fn)}
+    };
+    fn();
+    var obj = {
+        fn2: function() {
+            console.log(fn2); // 报错 : fn2 is not defined
+            // 打印fn2的时候，在函数作用域当中没有找到fn2，在全局作用域当中找不到fn2（因为是obj.fn2）
+            // 如果是console.log(this.fn2)就能找到
+        }
+    }
+    obj.fn2();
+</script>
+
+</html>
