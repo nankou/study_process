@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>对象</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // Object(); //构造函数，所有的对象 = new Object();
+
+    var obj = {
+        name: 'kkk',
+        age: 42
+    }
+    var obj2 = {
+        name: 'kkk',
+        age: 42
+    }
+
+    function Person(name, age) {
+        this.name = name;
+        this.age = age
+            // this.eat = function() {
+            //     console.log('吃东西');
+            // }
+    }
+    // 方法迁移到原型对象上
+    Person.prototype.eat = function() {
+        console.log('吃东西');
+    }
+    var person = new Person('nankou', 21); // 构造函数
+    var person1 = new Person('nankou', 21);
+
+    function Animal(name, age) {
+        this.name = name;
+        this.age = age
+    }
+    var dog = new Animal('wangwang', 41)
+
+
+    console.log(person1, person2); // {name: 'kkk', age: 222}  {name: 'saa', age: 12}
+</script>
+
+</html>

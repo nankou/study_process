@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    function quickSort(arr, left, right) {
+        var length = arr.length;
+        var partitionIndex;
+        var left = typeof left != 'number' ? 0 : left;
+        var right = typeof right != 'number' ? length - 1 : right;
+        if (left < right) {
+            // 基准值
+            partitionIndex = partition(arr, left, right);
+            // 分区后递归快速排序
+            quickSort(arr, left, partitionIndex - 1);
+            quickSort(arr, partitionIndex + 1, right);
+        }
+        return arr;;
+    }
+    // 分区操作
+    function partition(arr, left, right) {
+        // 设置基准值pivot
+        var pivot = left;
+        var index = pivot + 1;
+        for (var i = index; i <= right; i++) {
+            if (arr[i] < arr[pivot]) {
+                swap(arr, i, index);
+                index++;
+            }
+        }
+        swap(arr, pivot, index - 1);
+        return index - 1;
+    }
+    // 交换操作
+    function swap(arr, i, j) {
+        var temp = arr[i];
+        arr[i] = arr[j];
+        arr[j] = temp;
+    }
+    let test2 = [5, 3, 2, 1, 4];
+    let res = quickSort(test2);
+    console.log(res);
+</script>
+
+</html>
