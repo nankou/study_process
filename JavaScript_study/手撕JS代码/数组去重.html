@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>数组去重</title>
+</head>
+
+<body>
+    <h6>数组去重</h6>
+    <h6>给定一个数组，去除重复的元素</h6>
+</body>
+<script>
+    const arr = [1, 1, 1, '2', '2', 2, 3, '数组去重', 4, 5, 6, 7, 7];
+    // => [1, '2', 2, 3, '数组去重', 4, 5, 6, 7]
+
+    // 利用Set集合
+    let arr1 = Array.from(new Set(arr))
+    console.log(arr1);
+
+    // 两层for循环+splice
+    function unique(arr) {
+        let len = arr.length;
+        for (let i = 0; i < len; i++) {
+            for (let j = i + 1; j < len; j++) {
+                if (arr[i] === arr[j]) {
+                    arr.splice(j, 1);
+                    // 每删除一个树，j--保证j的值经过自加后不变。同时，len--，减少循环次数提升性能
+                    len--;
+                    j--;
+                }
+            }
+        }
+        return arr;
+    }
+    console.log(unique(arr));
+
+    // 使用indexOf: 如果要检索的字符串值没有出现，则该方法返回 -1。
+    function unique1(arr) {
+        const res = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (res.indexOf(arr[i]) === -1) res.push(arr[i]);
+        }
+        return res;
+    }
+    console.log(unique1(arr));
+
+    // 使用includes方法
+    function unique2(arr) {
+        const res = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (!res.includes(arr[i])) res.push(arr[i]);
+        }
+        return res;
+    }
+    console.log(unique2(arr));
+
+    // 使用filter方法
+    function unique3(arr) {
+        return arr.filter((item, index) => {
+            //当前元素，在原始数组中的第一个索引==当前索引值，否则返回当前元素
+            return arr.indexOf(item) === index
+        })
+    }
+    console.log(unique3(arr));
+
+    // 利用map集合法
+    function unique4(arr) {
+        const map = new Map();
+        const res = [];
+        for (let i = 0; i < arr.length; i++) {
+            if (!map.has(arr[i])) { // 判断集合里面是否含有该元素
+                map.set(arr[i], true)
+                res.push(arr[i]);
+            }
+        }
+        return res
+    }
+    console.log(unique4(arr));
+</script>
+
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text" id="number" value="30">
+    <button id="btn1">主线程计算 fibonacci值</button>
+    <button id="btn2">分线程计算 fibonacci值</button>
+</body>
+<script>
+    // console.log(Worker);
+    // // 1、创建wroker的实例对象，并且声明分线程的路径
+    // var worker = new Worker('./work.js');
+    // console.log(worker);
+    // // 2、在主线程发送消息给分线程
+    // worker.postMessage('how are you')
+
+    // // 绑定监听
+    // worker.onmessage = function(event) {
+    //     console.log('分线程发送过来的数据');
+    //     console.log(event);
+    // }
+
+    // 斐波那契数列
+    // 计算得到fibonacci数列第n个数的值
+    // 在主线程中计算：当位数较大的时候，会阻塞主线程，导致界面卡死
+    // 在分线程中计算：不会阻塞主线程
+
+    document.getElementById('btn1').onclick = function() {
+        var value = document.getElementById('number').value;
+        // console.log(fibonacci(value));
+        // 发送给分线程
+        var worker = new Worker('./work.js');
+    }
+    document.getElementById('btn2').onclick = function() {
+        var value = document.getElementById('number').value;
+        console.log(fibonacci(value));
+    }
+</script>
+
+</html>
