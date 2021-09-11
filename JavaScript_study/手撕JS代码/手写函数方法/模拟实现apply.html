@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 类数组：具备与数组特征类似的对象，可以通过下标进行调用，具有length属性，同时也可以通过for循环遍历。
+    // 但是，类数组不具备有forEach，splice，push等数组原型链上的方法。
+
+    // apply的语法：Function.apply(obj[,argArray])
+    // 具体参数：
+    // obj: 一个对象，Function的调用者，将会指向这个对象，如果不传，则默认是全局对象window
+    // [[,argArray]：第二个参数必须是数组或者是类数组，它们ui被转换成类数组，传入Function中
+
+    // 下面是具体实现：
+    Function.prototype.apply2 = function(context, arr) {
+        // this可以传null，默认指向window
+        var context = Object(context) || window;
+        // 首先获取调用call的函数
+        context.fn = this; // 将函数设为对象的属性
+        var res;
+        if (!arr) {
+            res = context.fn();
+        } else {
+            var args = [];
+            for (var i = 0, len = arr.length; i < len; i++) {
+                args.push('arr[' + i + ']')
+            }
+            res = eval('context.fn(' + args + ')')
+        }
+
+        delete context.fn; // 删除该函数
+        // 函数是有返回值的
+        return res;
+    }
+
+    // 测试代码
+    var foo = {
+        value: 1
+    };
+
+    function bar(name, age) {
+        return {
+            value: this.value,
+            name: name,
+            age: age
+        }
+    }
+    console.log(bar.apply2(foo, ['kkk', 21])); //{value: 1, name: 'kkk', age: 21}
+</script>
+
+</html>

@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // bind的语法：Function.bind(thisArg[, arg1[, arg2[, ...]]])
+    // bind()方法创建一个新的函数，在调用时候设置this关键字为提供的值，
+    // 并且在调用新函数时，将给定参数列表作为原函数的参数序列的前若干项
+
+    // bind()和call、apply不同的地方：
+    // bind也能改变this的指向，但是bind方法的返回值是函数，并且需要稍后再进行调用执行，而call和apply是立即调用
+    Function.prototype.bind2 = function(context) {
+        if (typeof this !== "function") {
+            throw new Error("Function.prototype.bind - what is trying to be bound is not callable");
+        }
+        var self = this;
+        // 获取bind2的函数从第二个参数到最后一个参数
+        var args = Array.prototype.slice.call(arguments, 1);
+        var fNOP = function() {};
+        var fBound = function() {
+            var bindArgs = Array.prototype.slice.call(arguments);
+            // 当作为构造函数时，this 指向实例，此时结果为 true，将绑定函数的 this 指向该实例，可以让实例获得来自绑定函数的值
+            // 以上面的是 demo 为例，如果改成 `this instanceof fBound ? null : context`，实例只是一个空对象，将 null 改成 this ，实例会具有 habit 属性
+            // 当作为普通函数时，this 指向 window，此时结果为 false，将绑定函数的 this 指向 context
+            return self.apply(this instanceof fBound ? this : context, args.concat(bindArgs));
+        }
+
+        // 修改返回函数的 prototype 为绑定函数的 prototype，实例就可以继承绑定函数的原型中的值
+        fNOP.prototype = this.prototype;
+        fBound.prototype = new fNOP();
+        return fBound;
+    }
+
+    // 测试代码
+    var foo = {
+        value: 1
+    }
+
+    function bar(name, age) {
+        this.habit = 'shopping';
+        console.log(name);
+        console.log(age);
+        return this.value;
+    }
+    bar.prototype.friend = 'kevin';
+
+    var bindFoo = bar.bind2(foo, 'daisy', 11);
+    console.log(bindFoo()); // 1
+
+    // 当bind返回的函数作为构造函数的时候，bind时指定的this值会失效，但传入的参数依然生效
+    var obj = new bindFoo('18');
+    console.log(obj.habit);
+    console.log(obj.friend);
+</script>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 面试题一
+    var obj = {
+        n: 1
+    }
+    var obj2 = obj;
+    obj2.n = 2;
+    console.log(obj.n); // 2
+
+    // 面试题二
+    function fn1(a) {
+        a.n = 3
+    }
+    var obj = {
+        n: 2
+    };
+    fn1(obj)
+    console.log(obj.n); //3
+
+    // 面试题三
+    var obj = {
+        n: 3
+    };
+
+    function fn2(a) {
+        a = {
+            n: 4
+        }
+    }
+    fn2(obj)
+    console.log(obj.n); // 3
+
+    // 面试题四
+    var a = {
+        n: 1
+    };
+    var b = a;
+    // 操作对象属性优先级 > 普通的赋值操作
+    // 也就是说，先是 a.x = {n:2}，然后a= {n:2}
+    a.x = a = {
+        n: 2
+    };
+    // 执行到这一步的时候，a -> {n:2}; b -> { n:1,x:{n:2}}
+    console.log(a.n, b.n); // 2 1 
+    console.log(a.x, b.x); // undefined {n:2}
+
+
+    // 面试题五
+    // 作用域与作用域链、变量查找
+    var x = 10;
+
+    function fn() {
+        console.log(x);
+    }
+
+    function show(f) {
+        var x = 20;
+        f()
+    }
+    show(fn) // 10
+
+    // 面试题六
+    var fn = function() {
+        console.log(fn);
+    }
+    fn() // f(){console.log(fn)}
+    var obj = {
+        fn2: function() {
+            console.log(fn2);
+        }
+    }
+    obj.fn2(); // 报错：fn2 is not defined
+
+
+    // 面试题七
+    var name = 'World';
+    (function() {
+        if (typeof name === 'undefined') {
+            var name = 'Jack'
+            console.log(name);
+        } else {
+            console.log(name);
+        }
+    })()
+    // Jack
+
+
+    // 面试题八
+</script>
+
+</html>

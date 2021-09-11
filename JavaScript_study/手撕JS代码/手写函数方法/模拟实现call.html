@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+     *猫吃鱼，狗吃肉，奥特曼打小怪兽。
+     *有天狗想吃鱼了
+     *猫.吃鱼.call(狗，鱼)
+     *狗就吃到鱼了
+     *猫成精了，想打怪兽
+     *奥特曼.打小怪兽.call(猫，小怪兽)
+     * 猫也可以打小怪兽了
+     */
+
+    // call 和 apply 的共同点
+    // 都能改变函数执行的上下文，将一个对象的方法交给另一个对象来执行，并且是立即执行的
+
+    // call的语法：Function.call(obj, [param1[, param2[, … [, paramN]]]])
+    // 具体参数：
+    // obj: 一个对象，Function的调用者，将会指向这个对象，如果不传，则默认是全局对象window
+    // [param1...]：第二个参数开始，可以接收任意的参数，比如，call(obj,1,2,3)，则接收到的参数就是1,2,3
+
+    // 使用例子
+    // var foo = {
+    //     value: 1
+    // }
+
+    // function bar() {
+    //     console.log(this.value);
+    // }
+    // bar.call(foo); // 1
+    // 此时call改变了this的指向，将this指向foo
+
+    // 下面是具体实现过程
+    Function.prototype.call2 = function(context) {
+        if (typeof this !== 'function') {
+            throw new TypeError('Type Error');
+        }
+        // this可以传null，默认指向window
+        var context = context || window;
+        // 首先获取调用call的函数
+        context.fn = this; // 将函数设为对象的属性
+        var args = [];
+        for (var i = 1, len = arguments.length; i < len; i++) {
+            args.push('arguments[' + i + ']')
+        }
+        var res = eval('context.fn(' + args + ')')
+        delete context.fn; // 删除该函数
+        // 函数是有返回值的
+        return res;
+    }
+
+    // 测试代码
+    var foo = {
+        value: 1
+    };
+
+    function bar(name, age) {
+        console.log(name);
+        console.log(age);
+        console.log(this.value);
+    }
+    bar.call2(foo, 'kkk', 21)
+</script>
+
+</html>
