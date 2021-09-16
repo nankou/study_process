@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写forEach()</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // forEach的用法
+    // forEach()方法用于调用数组的每个元素，并将元素传递给回调函数
+    // 主要功能是遍历数组，该语句需要一个回调函数作为参数。
+    // forEach返回值为undefined
+
+    // 比如打印出数组的值
+    var arr = ['a', 'b', 'c'];
+    arr.forEach(function(value, index, arr) {
+        console.log(value); // a b c
+    })
+
+
+    // 语法:  array.forEach(function(currentValue, index, arr), thisValue)
+    // 参数说明：
+    // currentValue： 必选，当前元素的值
+    // index: 可选，当前元素的索引值
+    // arr： 可选，当前元素属于的数组对象
+    // thisValue： 可选，传递给函数的值一般用 "this" 值。如果这个参数为空， "undefined" 会传递给 "this" 值
+    // 具体实现：
+    Array.prototype.forEach = function(callback, thisArg) {
+        if (this == null) {
+            throw new TypeError("this is null or not defined");
+        }
+        if (typeof callback !== 'function') {
+            throw new TypeError(callback + "is not a function")
+        }
+        const O = Object(this);
+        const len = O.length >>> 0;
+        let k = 0;
+        while (k < len) {
+            if (k in O) {
+                callback.call(thisArg, O[k], k, O);
+            }
+            k++;
+        }
+    }
+</script>
+
+</html>

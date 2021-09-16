@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>柯里化</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 柯里化（currying）的定义
+    // 将使用多个参数的一个函数转换成一系列使用一个参数的函数
+    // 举例：
+    function add(a, b) {
+        return a + b;
+    }
+    // 执行add函数，一次传入两个参数即可
+    add(1, 2) //3
+
+    // 假设有一个curry函数可以做到柯里化
+    var addCurry = curry(add);
+    console.log(addCurry(1)(2)); // 3
+
+    // 柯里化的作用：curry 的这种用途可以理解为：参数复用。本质上是降低通用性，提高适用性。
+    // 具体实现：
+
+    function curry(fn, currArgs) {
+        return function() {
+            let args = [].slice.call(arguments);
+            // 首次调用时，若未提供最后一个参数currArgs，则不用进行args的拼接
+            if (currArgs !== undefined) {
+                args = args.concat(currArgs);
+            }
+            // 递归调用
+            if (args.length < fn.length) {
+                return curry(fn, args);
+            }
+            // 递归出口
+            return fn.apply(null, args);
+        }
+    }
+</script>
+
+</html>

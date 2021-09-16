@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写filter</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // filter的用法
+    // 创建一个新的数组，新数组中的元素是通过检查数组中所有符合条件的元素
+    // filter不会改变原数组
+
+    // 比如利用filter遍历出所有的偶数
+    let arr = [56, 15, 48, 3, 7];
+    let newArr = arr.filter(function(value, index, array) {
+        return value % 2 === 0;
+    });
+
+    // 或者利用filter实现数组去重
+    function unique(arr) {
+        return arr.filter(function(item, index, arr) {
+            //当前元素，在原始数组中的第一个索引==当前索引值，否则返回当前元素
+            return arr.indexOf(item, 0) === index;
+        });
+    }
+
+    // 语法:  array.filter(function(currentValue,index,arr), thisValue)
+    // 参数说明：
+    // currentValue： 必选，当前元素的值
+    // index: 可选，当前元素的索引值
+    // arr： 可选，当前元素属于的数组对象
+    // thisValue： 可选，对象作为该执行回调时使用，传递给函数，作为this的值
+    // 具体实现：
+    Array.prototype.filter = function(callback, thisArg) {
+        if (this == undefined) {
+            throw new TypeError('this is null or not undefined');
+        }
+        if (typeof callback !== 'function') {
+            throw new TypeError(callback + 'is not a function');
+        }
+        const res = [];
+        // 让O成为回调函数的对象传递（强制转换对象）
+        const O = Object(this);
+        // >>>0 保证len为number，且为正整数
+        const len = O.length >>> 0;
+        for (let i = 0; i < len; i++) {
+            // 检查i是否在O的属性（会检查原型链）
+            if (i in O) {
+                // 回调函数调用传参
+                if (callback.call(thisArg, O[i], i, O)) {
+                    res.push(O[i]);
+                }
+            }
+        }
+        return res;
+    }
+</script>
+
+</html>

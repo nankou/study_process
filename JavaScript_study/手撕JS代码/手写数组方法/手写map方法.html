@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写map方法</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // map方法的定义和用法
+    // 返回一个新数组，数组中的元素为原始数组元素调用函数处理后的值。
+    // map()不会改变原数组
+
+    // 比如返回一个数组，数组中元素为原始数组的平方根
+    var nums = [4, 9, 16, 25];
+
+    function fn(nums) {
+        return nums.map(Math.sqrt)
+    }
+    console.log(fn(nums)); // [2, 3, 4, 5]
+
+    // 比如数组中的每个元素都乘以输入框指定的值，并返回新数组
+    var nums = [4, 9, 16, 25];
+
+    function fn2() {
+        return nums.map(function(item, index, arr) {
+            // return num * document.getElementById("multiplyWith").value;
+            return item * 2
+        })
+    }
+    console.log(fn2(nums)); // [8, 18, 32, 50]
+
+
+    // 语法:  array.map(function(currentValue,index,arr), thisValue)
+    // 参数说明：
+    // currentValue： 必选，当前元素的值
+    // index: 可选，当前元素的索引值
+    // arr： 可选，当前元素属于的数组对象
+    // thisValue： 可选，对象作为该执行回调时使用，传递给函数，作为this的值
+    // 具体实现：
+    Array.prototype.map = function(callback, thisArg) {
+        if (this === undefined) {
+            throw new TypeError("this is null or not defined");
+        }
+        if (typeof callback !== 'function') {
+            throw new TypeError(callback + 'is not a function')
+        }
+        const res = [];
+        // 让O成为回调函数的对象传递（强制转换对象）
+        const O = Object(this);
+        // >>>0 保证len为number，且为正整数
+        const len = O.length >>> 0;
+        for (let i = 0; i < len; i++) {
+            // 检查i是否在O的属性（会检查原型链）
+            if (i in O) {
+                // 调用回调函数并传入新数组
+                res[i] = callback.call(thisArg, O[i], i, this)
+            }
+        }
+        return res;
+    }
+</script>
+
+</html>

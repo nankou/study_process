@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手写promise</title>
+</head>
+
+<body>
+    <script src="./Promise_class.js"></script>
+    <script>
+        // 1、定义整体结构
+        const p = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                // resolve(1)
+                reject(2)
+
+            }, 1000);
+        }).then(
+            value => {
+                console.log('onResolved1()', value);
+            },
+            reason => {
+                console.log('onRejected1()', reason);
+                return new Promise((resolve, reject) => reject(5))
+            }
+        ).then(
+            value => {
+                console.log('onResolved2()', value);
+            },
+            reason => {
+                console.log('onRejected2()', reason);
+                return new Promise((resolve, reject) => reject(6))
+            }
+        ).catch(
+            reason => {
+                console.log('onRejected', reason);
+            }
+        )
+    </script> -->
+
+    <!-- resolve/reject使用 -->
+    <script>
+        const p1 = Promise.resolve(1) // 如果是一般值
+        const p2 = Promise.resolve(Promise.resolve(3))
+        const p3 = Promise.resolve(Promise.reject(4))
+        p1.then(value => {
+            console.log('p1', value)
+        })
+        p2.then(value => {
+            console.log('p2', value)
+        })
+        p3.catch(reason => {
+            console.log('p3', reason)
+        })
+    </script>
+
+    <script>
+        // Promise.race
+        // Promise.all
+        const p1 = Promise.resolve(1) // 如果是一般值
+        const p2 = Promise.resolve(Promise.resolve(3))
+        const p3 = Promise.resolve(Promise.reject(4))
+            // const pRace = Promise.race([p1, p2, 4])
+            //     // const pRace = Promise.race([p1, p2, p3])
+            // pRace.then(
+            //     value => {
+            //         console.log('race onResolved', value);
+            //     },
+            //     reason => {
+            //         console.log('race onRejected', reason);
+            //     }
+            // )
+
+        const p6 = Promise.resolveDelay(66, 2000)
+        const p7 = Promise.rejectDelay(77, 3000)
+        p6.then(value => {
+            console.log('p6', value);
+        })
+        p7.catch(reason => {
+            console.log('p7', reason);
+        })
+    </script>
+</body>
+
+</html>
