@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var obj3 = {
+        name: 'kkk',
+        age: 42
+    }
+    var sex = '男'
+    Object.defineProperties(obj3, {
+        sex: {
+            get: function() { // 设置值，当获取扩展属性值的时候，get自动被调用
+                console.log('get调用', this);
+                return sex;
+            },
+            set: function(value) { // 当修改扩展的属性值的时候，set自动被调用
+                console.log('set调用', value, this);
+                // this.sex = value 如果这么改的话，set就会一直被调用，陷入死循环
+                sex = value; //只需要在get上修改，set就可以拿到get的值
+            }
+        }
+    })
+    console.log(obj3.sex);
+    obj3.sex = '女';
+    console.log(obj3.sex);
+</script>
+
+</html>

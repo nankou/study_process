@@ -12,39 +12,26 @@
 
 </body>
 <script>
-    // var balancedStringSplit = function(s) {
-    //     let ans = 0; // 表示得到的平衡字符串的数量
-    //     let sta = [];
-    //     for (let i = 0; i < s.length; i++) {
-    //         console.log(i);
-    //         if (sta.length === 0 || s[i] === sta[sta.length - 1]) {
-    //             sta.push(s[i])
-    //         } else {
-    //             sta.pop()
-    //         }
-    //         if (sta.length === 0) {
-    //             ans++
-    //         }
-    //     }
-    //     return ans;
-    // };
-    // let s = "RLLLLRRRLR";
-    // console.log(balancedStringSplit(s));
-    var hammingWeight = function(n) {
-        let res = 0;
-        let ans;
-        let temp = n;
-        while (ans != 0) {
-            ans = Math.floor(temp / 2);
-            // console.log(ans);
-            if (temp % 2 === 1) {
-                res++;
-            }
-            temp = ans;
+    var findNthDigit = function(n) {
+        // 数字的位数 
+        let digit = 1;
+        // 起始的数字
+        let start = 1;
+        // 数位数量
+        let count = 9;
+        while (n > count) { //1
+            n -= count;
+            digit += 1;;
+            start *= 10;
+            count = digit * start * 9;
+
         }
-        return res;
+        let num = start + (n - 1) / digit;
+        console.log(num);
+        return num
     };
-    console.log(hammingWeight(4294967293));
+
+    console.log(findNthDigit(11));
 </script>
 
 </html>

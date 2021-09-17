@@ -42,15 +42,55 @@
     // check('zhao',  'vivienne')
 
 
-    function fun(nums) {
-        let res = [];
-        res[0] = nums.reduce((item, value) => item.concat(
-            item.map(set => [value, ...set])
-        ), [
-            []
-        ])
-        return res
-    }
-    let nums = [1, 2, 3];
-    console.log(fun(nums));
+    // function fun(nums) {
+    //     let res = [];
+    //     res[0] = nums.reduce((item, value) => item.concat(
+    //         item.map(set => [value, ...set])
+    //     ), [
+    //         []
+    //     ])
+    //     return res
+    // }
+    // let nums = [1, 2, 3];
+    // console.log(fun(nums));
+    // function changeDrank(numCap) {
+    //     // write code here
+    //     if (numCap < 3) return numCap;
+    //     if (numCap === 0) return 0;
+    //     let sum = numCap; // 饮料的和
+    //     let n = numCap; // 当前的瓶盖
+    //     while (numCap >= 3) {
+    //         n = numCap / 3;
+    //         numCap = n + numCap % 3;
+    //         sum += n;
+    //     }
+    //     if (numCap == 2 || numCap == 3) {
+    //         sum += 1
+    //     }
+    //     return sum;
+    // }
+    // console.log(changeDrank(3));
+    // let num1 = "11111111111111111"
+    // let num2 = "22222222222222222"
+
+    // function addStrings(num1, num2) {
+    //     // write code here
+    //     // return parseInt(num1) + parseInt(num2)
+    //     let res = '';
+    //     a = num1.split('');
+    //     b = num2.split('');
+    //     let c = 0;
+    //     while (a.length || b.length || c) {
+    //         c += ~~a.pop() + ~~b.pop();
+    //         res = c % 10 + res;
+    //         c = c > 9;
+    //     }
+    //     return res.replace(/^0+/, '');
+    // }
+    // console.log(addStrings(num1, num2));
+
+    console.log([] === []);
+    console.log("1" == true);
+    console.log(NaN == NaN);
+    console.log(new String(1) === '1');
 </script>

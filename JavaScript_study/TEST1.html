@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 判断是否为二叉搜索树
+    function isValidBST(root) {
+        // write code here
+        let pre;
+
+        function travse(p) {
+            if (!p) return true;
+            let left = travse(p.left);
+            if (typeof pre !== 'undefined' && pre >= p.val) return false;
+            pre = p.val;
+            let right = travse(p.right);
+            return left && right;
+        }
+        return travse(root;)
+    }
+</script>
+
+</html>
+<style>
+    .container {
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    .body {
+        flex: 1 1 auto;
+        background-color: blue;
+    }
+    
+    .header,
+    .footer {
+        height: 100px;
+        flex: 0 0 auto;
+        background-color: red;
+    }
+</style>

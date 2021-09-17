@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>iterator实现</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    /*
+     *工作原理：
+     * 创建一个指针对象，指向数据结构的起始位置
+     * 第一次调用next方法，指针会自动指向数据结构的第一个成员
+     * 接下来不断调用next方法，指针会一直往后移动，直到指向最后一个成员
+     * 每调用一次next方法返回的是一个包含value和done的对象：{value:当前成员的值,done:布尔值}
+     * value表示当前成员的值，done对应的布尔值表示当前数据的结构是否遍历结束
+     * 当遍历结束的时候返回的value值是undefined，done值为false
+     */
+    // 实现一个迭代器功能
+    function iteratorUtil() {
+        let that = this; // 缓存this
+        let index = 0; // 用来标识指针的起始位置
+        console.log('调用了自己写的接口');
+        return { // 1、指针对象
+            next() { // 2、指针对象的next方法
+                return index < that.length ? {
+                    value: that[index++],
+                    done: false
+                } : {
+                    value: that[index++],
+                    done: true
+                }
+            }
+        }
+    }
+    Array.prototype[Symbol.iterator] = iteratorUtil; // 修改原型链上原本的iterator接口
+    let arr = [2, 3, 3, 4, 5]
+        // let iteratorObj = iteratorUtil(arr);
+        // console.log(iteratorObj.next()); // {value: 2, done: false}
+        // console.log(iteratorObj.next()); // {value: 3, done: false}
+        // console.log(iteratorObj.next()); // {value: 3, done: false}
+        // console.log(iteratorObj.next()); // {value: 4, done: false}
+        // console.log(iteratorObj.next()); // {value: 5, done: false}
+        // console.log(iteratorObj.next()); // {value: undefined, done: true}
+        // console.log(iteratorObj.next()); // {value: undefined, done: true}
+    console.log(...arr);
+
+    console.log('-------------------我是分割线--------------');
+    // 如果我现在想给对象的底层添加一个iterator接口
+
+    // 实现一个迭代器功能
+    function iteratorUtil2() {
+        let that = this; // 缓存this
+        let index = 0; // 用来标识指针的起始位置
+        console.log('调用了自己写的接口');
+
+        // 判断目标数据接口是对象还是数组
+        if (that instanceof Array) {
+            return { // 1、指针对象
+                next() { // 2、指针对象的next方法
+                    return index < that.length ? {
+                        value: that[index++],
+                        done: false
+                    } : {
+                        value: that[index++],
+                        done: true
+                    }
+                }
+            }
+        } else {
+            // 对象里面遍历的就是key，而不是数组里的length
+            // Object.keys()返回值是一个数组，该数组包含了目标对象的所有的key
+            // 所以应该是Object.keys(obj).length
+            let keys = Object.keys(that); // 目标对象的所有key的数组
+            let length = keys.length;
+            return { // 1、指针对象
+                next() { // 2、指针对象的next方法
+                    return index < length ? {
+                        value: that[keys[index++]],
+                        done: false
+                    } : {
+                        value: that[keys[index++]],
+                        done: true
+                    }
+                }
+            }
+        }
+
+    }
+
+    // 1、给obj的原型上也添加一个接口
+    Object.prototype[Symbol.iterator] = iteratorUtil2;
+
+    let obj = {
+        name: 'kkk',
+        age: 12
+    }
+    console.log(obj);
+
+    // 调用接口
+    for (let i of obj) {
+        console.log(i);
+    }
+</script>
+
+</html>
+
+</html>
