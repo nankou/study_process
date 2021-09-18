@@ -20,6 +20,9 @@
     let arr1 = Array.from(new Set(arr))
     console.log(arr1);
 
+    let uniqueArr = arr => [...new Set(arr)]
+    console.log(uniqueArr(arr));
+
     // 两层for循环+splice
     function unique(arr) {
         let len = arr.length;

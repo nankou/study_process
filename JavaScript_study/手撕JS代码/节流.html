@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>节流</title>
+</head>
+
+<body>
+    <!-- 节流函数 -->
+    <!-- 实现性能较好的懒加载 ，一段时间内只做一件事情-->
+    <button id="button">点击（节流）</button>
+</body>
+<script>
+    function throttle(func, wait) {
+        let timerOut;
+        return function() {
+            let context = this;
+            let args = arguments;
+            if (!timerOut) {
+                timerOut = setTimeout(function() {
+                    timerOut = null
+                    func.apply(context, args)
+                }, wait)
+            }
+        }
+    }
+
+    // 例子
+    function handle() {
+        console.log(Math.random())
+    }
+    document.getElementById('button').onclick = throttle(handle, 2000)
+
+    // 例子三：滚动条监听
+    // 监听浏览器滚动事件，返回当前滚动条与顶部的距离
+    // 原始滚动条滚动监听位置代码
+    // 需求：如果用户一直拖着滚动条不松手，在一定间隔内让他定期输出滚动条位置
+    // 实现：可以应用节流代码
+    function throttle(fn, delay) {
+        let valid = true
+        return function() {
+            if (!valid) {
+                // 休息时间 暂不接客
+                return false
+            }
+            // 工作时间， 执行函数并且在间隔期内吧状态位设为无效
+            valid = false
+            setTimeout(() => {
+                fn()
+                valid = true;
+            }, delay)
+        }
+    }
+
+    function showTop() {
+        var scrollTop = document.body.scrollTop || document.documentElement.scrollTop;
+        console.log('滚动条位置' + scrollTop)
+    }
+    window.onscroll = throttle(showTop, 1000)
+</script>
+
+</html>

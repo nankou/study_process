@@ -12,26 +12,36 @@
 
 </body>
 <script>
-    var findNthDigit = function(n) {
-        // 数字的位数 
-        let digit = 1;
-        // 起始的数字
-        let start = 1;
-        // 数位数量
-        let count = 9;
-        while (n > count) { //1
-            n -= count;
-            digit += 1;;
-            start *= 10;
-            count = digit * start * 9;
+    function maxArea(height) {
+        // write code here
+        let maxarea = 0;
+        let area = 0; //当前区域
+        let left;
+        let right;
+        for (let i = 0; i < height.length; i++) {
+            left = i;
+            right = i;
+            while (left > 0 && height[left - 1] >= height[i]) {
+                left--; // 左边界
+            }
+            while (right < height.length - 1 && height[right + 1] >= height[i]) {
+                right++; // 右边界
+            }
+
+            let minHeigth = height[left] > height[right] ? height[right] : height[left]
+            area = minHeigth * (right - left);
+            if (area > maxarea) {
+                console.log('left', left);
+                console.log('right', right);
+                console.log('i', i);
+                maxarea = area;
+            }
 
         }
-        let num = start + (n - 1) / digit;
-        console.log(num);
-        return num
-    };
-
-    console.log(findNthDigit(11));
+        return maxarea;
+    }
+    let height = [1, 7, 6, 2, 5, 4, 8, 3, 7];
+    console.log(maxArea(height));
 </script>
 
 </html>

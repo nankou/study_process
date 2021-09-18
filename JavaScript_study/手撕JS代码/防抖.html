@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>防抖</title>
+</head>
+
+<body>
+    <!-- 例子一：输入框的实时监听 -->
+    <input type="text" id="input">
+</body>
+<script>
+    // 防抖函数
+    // 当持续频繁的触发事件的时候，会影响性能。为了优化这种频繁触发事件的情况，出现了防抖函数。
+    // 比如window的resize，scroll，mousedown、mousemove，keyup、keydown...
+    // 防抖的原理：不管怎么触发事件，要执行的东西一定在事件触发n秒之后才执行。
+    // 如果在事件触发的n秒内又触发了，就以新的时间为准，n秒之后才执行。
+    function debounce(fn, delay) {
+        let timer;
+        return function() {
+            var context = this; // this指向
+            var args = arguments; // event对象
+            clearTimeout(timer)
+            timer = setTimeout(() => {
+                fn.apply(context, args)
+            }, delay);
+        }
+    }
+
+
+    // 增加需求：第一次触发的时候先执行，然后等停止触发n秒之后，才可以重新触发执行
+    function debounce1(fn, delay, immediate) {
+        let timer;
+        return function() {
+            let context = this;
+            let args = arguments;
+
+            if (timer) clearTimeout(timer);
+            if (immediate) {
+                // 如果已经执行过，不再执行
+                var callNow = !timer;
+                timer = setTimeout(() => {
+                    timer = null;
+                }, delay);
+                if (callNow) fn.apply(context, args)
+            } else {
+                timer = setTimeout(() => {
+                    fn.apply(context, args)
+                }, delay);
+            }
+
+        }
+    }
+
+
+    // 例子测试
+    function inputFun(value) {
+        console.log('你输出的结果是' + value)
+    }
+    const input = document.getElementById("input")
+    const debounceInput = debounce(inputFun, 500)
+        // 监听Input框的输入
+    input.addEventListener('keyup', function(e) {
+        debounceInput(e.target.value)
+    })
+</script>
+
+</html>

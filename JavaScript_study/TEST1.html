@@ -12,40 +12,14 @@
 
 </body>
 <script>
-    // 判断是否为二叉搜索树
-    function isValidBST(root) {
-        // write code here
-        let pre;
+    function fn(str, m) {
 
-        function travse(p) {
-            if (!p) return true;
-            let left = travse(p.left);
-            if (typeof pre !== 'undefined' && pre >= p.val) return false;
-            pre = p.val;
-            let right = travse(p.right);
-            return left && right;
-        }
-        return travse(root;)
     }
+    let str = 'CCCCC'
+    console.log(fn(str, 3));
 </script>
 
 </html>
 <style>
-    .container {
-        height: 100%;
-        display: flex;
-        flex-direction: column;
-    }
-    
-    .body {
-        flex: 1 1 auto;
-        background-color: blue;
-    }
-    
-    .header,
-    .footer {
-        height: 100px;
-        flex: 0 0 auto;
-        background-color: red;
-    }
+
 </style>
