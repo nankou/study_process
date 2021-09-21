@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模拟new操作</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 模拟new实现
+    function objectFactory() {
+        var obj = new Object();
+        Constructor = [].shift.call(arguments);
+        obj.__proto__ = Constructor.prototype;
+        var ret = Constructor.apply(obj, arguments);
+        // 判断构造函数执行的是什么数据类型，如果是对象则返回，否则就返回刚创建的新对象。
+        return typeof ret === 'object' ? ret : obj;
+    }
+
+    // 模拟new操作
+    function newPerator(ctor, ...args) {
+        if (typeof ctor !== 'function') {
+            throw new TypeError('Type Error')
+        }
+        // 1、以ctor.prototype为原型创建一个对象
+        const obj = Object.create(ctor.prototype);
+        // 2、执行构造函数并将this绑定到新创建的对象上
+        const res = ctor.apply(obj, args);
+        // 3、判断构造函数执行返回的结果是否为引用数据类型，如果是则返回构造函数执行的结果，否则返回刚刚新创建的对象。
+        const isObject = typeof res === 'object' && res !== null;
+        const isFunction = typeof res === 'function';
+        return isObject || isFunction ? res : obj;
+
+    }
+</script>
+
+</html>
