@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>深拷贝</title>
+</head>
+
+<body>
+
+</body>
+
+<script>
+    // 判断数据类型是对象还是数组
+    function getType(target) {
+        return Object.prototype.toString.call(target).slice(8, -1); // [object Array].slice(8,-1) ==> Array
+    }
+
+    function cloneUtil(target) {
+        let res;
+        if (getType(target) === 'Object') {
+            res = {};
+        } else if (getType(target) === 'Array') {
+            res = []
+        } else { // 如果是基本数据类型，直接赋值即可
+            return target
+        }
+        // 遍历目标数据
+        for (let i in target) {
+            // 收集个体数据
+            let item = target[i];
+            // 拷贝的过程
+            // res[i] = item; ====>>  这个是引用地址传递，所以还是浅拷贝
+            // 拷贝的数据不能用引用数据类型，如果一旦有引用数据类型继续拆解克隆
+            // 也就是递归
+            if (getType(item) === 'Object' || 'Array') {
+                res[i] = cloneUtil(item)
+            } else {
+                res[i] = item
+            }
+
+        }
+        return res;
+    }
+    let obj = {
+        name: 'kkkk',
+        age: 42,
+        sex: {
+            option1: '男',
+            option2: '女',
+            option3: '不男不女'
+        }
+    }
+    let res = cloneUtil(obj);
+    res.sex.option1 = '12123123'
+    console.log(res, obj);
+
+
+
+    /*深拷贝实现二：JSON互转*/
+    // JSON.parse JOSN.stringfy
+    // 先把对象转换成字符串，再转换成新对象，就不存在引用传递的问题
+    function deepClone(obj) {
+        return JSON.parse(JSON.stringify(obj))
+    }
+    console.log(deepClone(obj));
+</script>
+
+</html>

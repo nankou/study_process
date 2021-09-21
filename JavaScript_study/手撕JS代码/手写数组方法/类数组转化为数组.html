@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="container">
+        <div class="content">
+            <h1>类数组转换成数组</h1>
+        </div>
+    </div>
+</body>
+<script>
+    // 类数组的意思是：虽然具有length属性，但是不具有数组原型上的方法。
+    // 常见的类数组有：arguments、DOM操作返回的结果（比如 document.getElementsByTagName()）
+    // 将类数组转换成数组
+
+    let classArr = document.querySelectorAll('div')
+    console.log(classArr); // NodeList(2)[div.containter,div.content]
+
+    // 一、Array.from
+    let newArr = Array.from(classArr);
+
+    // 二、Array.prototype.slice.call()
+    let newArr2 = Array.prototype.slice.call(classArr);
+
+    // 三、扩展运算符
+    let newArr3 = [...classArr];
+
+    // 四、利用concat拼接数组
+    let newArr4 = Array.prototype.concat.apply([], classArr)
+</script>
+
+</html>

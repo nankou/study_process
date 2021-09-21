@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 数组方法reduce
+    // 使用reduce实现map
+    const  myMap  =   function(fn)  {            
+            const  arr  =  this;            
+            return  arr.reduce((pre,  cur,  index,  arr)  =>  {                
+                pre.push(fn.call(this,  cur,  index,  arr));                
+                return  pre;            
+            },   [])        
+        }         // 打印结果
+            
+    Array.prototype.Map  =  myMap;    
+    var  arr1  =   [1,  2,  3];    
+    let  arrMap  =  arr1.Map(function(x)  {        
+        return  x  *  2;        
+        console.log(x  *  2) // 2,4,6
+                
+    })
+</script>
+
+</html>
