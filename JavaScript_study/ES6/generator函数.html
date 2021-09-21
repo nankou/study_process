@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width= n, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    function* generatorUtil() {
+        console.log('函数开始执行');
+        yield 1; // 遇到yield就暂停了
+        console.log('函数继续执行');
+        yield 2;
+        console.log('函数执行完毕');
+    }
+    let GU = generatorUtil(); // 返回出一个遍历器对象
+    console.log(GU);
+    GU.next(); // 打印出“函数开始执行”，也就是调用这个的时候函数才开始执行
+    GU.next(); // 函数继续执行
+</script>
+
+</html>
