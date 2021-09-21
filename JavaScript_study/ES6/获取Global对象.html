@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 获取全局对象
+    var getGlobal = function() {
+        if (typeof self !== 'undefined') {
+            return self;
+        }
+        if (typeof window !== 'undefined') {
+            return window;
+        }
+        if (typeof global !== 'undefined') {
+            return global;
+        }
+        throw new Error('unable to locate global object');
+    };
+    console.log(getGlobal());
+</script>
+
+</html>
+
+</html>
