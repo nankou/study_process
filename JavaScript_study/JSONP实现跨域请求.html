@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>使用JSONP实现跨域请求</title>
+</head>
+
+<body>
+    <h6>同源策略：协议相同、域名相同、端口号相同</h6>
+    <h6>同源策略限制了cookie、localStorage、IndexDB无法读取，DOM无法获得，AJAX请求不能发送</h6>
+    <h6>常见的跨域标签元素：link、script、img、iframe</h6>
+    <!-- <script type="text/javascript">
+        var data = GetRemoteData();
+        alert(data);
+    </script> -->
+</body>
+<script>
+    for (let i = 0; i < 6; i++) {
+        setTimeout(function() {
+            console.log(i);
+        }, 1000)
+    }
+</script>
+
+
+</html>

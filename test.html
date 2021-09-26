@@ -14,11 +14,11 @@
 
 </html>
 <script>
-    let arr = [5, 5, 5, 5, 5]
-    for (let i in arr) {
-        console.log('for in：', i);
+    const reverseWords = function(s) {
+        let arr = s.trim().split(' ');
+        let newArr = arr.filter(i => i && i.trim())
+        return newArr.reverse().join(' ')
     }
-    for (let i of arr) {
-        console.log('for of：', i);
-    }
+    let s = "  hello world!  "
+    console.log(reverseWords(s));
 </script>
