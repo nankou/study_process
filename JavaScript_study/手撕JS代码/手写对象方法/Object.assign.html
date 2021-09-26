@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // Object.assign用于浅拷贝对象
+    Object.defineProperty(Object, 'assign', {
+        value: function(target, ...args) {
+            if (target == null) {
+                return new TypeError('Cannot convert undefined or null to object');
+            }
+            // 目标对象需要统一是引用数据类型，若不是会自动转换
+            const to = Object(target);
+
+            for (let i = 0; i < args.length; i++) {
+                // 每一个源对象
+                const nextSource = args[i];
+                if (nextSource !== null) {
+                    // 使用for...in和hasOwnProperty双重判断，确保只拿到本身的属性、方法（不包含继承的）
+                    for (const nextKey in nextSource) {
+                        if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                        }
+                    }
+                }
+            }
+            return to;
+        },
+        // 不可枚举
+        enumerable: false,
+        // 属性值不可被修改
+        writable: true,
+        // 属性的描述符不可被改变
+        configurable: true,
+    })
+</script>
+
+</html>
