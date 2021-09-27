@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h6>script标签不遵循同源协议，可以用来进行跨域请求，优点是兼容性号，但仅限于GET请求</h6>
+</body>
+<script>
+    const jsonp = ({
+        url,
+        params,
+        callbackName
+    }) => {
+        const generateUrl = () => {
+            let dataSrc = '';
+            for (let key in params) {
+                if (Object.prototype.hasOwnProperty.call(params, key)) {
+                    dataSrc += `${key} = ${params[key]}&`
+                }
+            }
+            dataSrc += `callback = ${callbackName}`;
+            return `${url}?${dataSrc}`;
+        }
+        return new Promise((resolve, reject) => {
+            const scriptEle = document.createElement('script');
+            scriptEle.src = generateUrl();
+            document.body.appendChild(scriptEle);
+            window[callbackName] = data => {
+                resolve(data);
+                document.removeChild(scriptEle);
+            }
+        })
+    }
+</script>
+
+</html>

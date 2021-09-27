@@ -12,36 +12,16 @@
 
 </body>
 <script>
-    function maxArea(height) {
-        // write code here
-        let maxarea = 0;
-        let area = 0; //当前区域
-        let left;
-        let right;
-        for (let i = 0; i < height.length; i++) {
-            left = i;
-            right = i;
-            while (left > 0 && height[left - 1] >= height[i]) {
-                left--; // 左边界
-            }
-            while (right < height.length - 1 && height[right + 1] >= height[i]) {
-                right++; // 右边界
-            }
-
-            let minHeigth = height[left] > height[right] ? height[right] : height[left]
-            area = minHeigth * (right - left);
-            if (area > maxarea) {
-                console.log('left', left);
-                console.log('right', right);
-                console.log('i', i);
-                maxarea = area;
-            }
-
+    var lastRemaining = function(n, m) {
+        // 约瑟夫环问题
+        let ans = 0;
+        // 由于最后一轮只剩下两个人，所以从2开始反推
+        for (let i = 2; i <= n; i++) {
+            ans = (ans + m) % i
         }
-        return maxarea;
-    }
-    let height = [1, 7, 6, 2, 5, 4, 8, 3, 7];
-    console.log(maxArea(height));
+        return ans
+    };
+    console.log(lastRemaining(10, 17));
 </script>
 
 </html>
