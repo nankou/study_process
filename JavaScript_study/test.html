@@ -12,24 +12,84 @@
 
 </body>
 <script>
-    function Test() {
-        this.a = 1;
-    }
-    Test.prototype.b = 2;
-    let test = new Test();
-    Object.prototype.c = 3;
-    test.a = 1;
-    console.log(Test.prototype.__proto__ === Object.prototype); // ture
-    console.log(test.__proto__); // {b: 2, constructor: ƒ}
-    console.log(Test.prototype); // {b: 2, constructor: ƒ}
-    console.log(Test.prototype.__proto__); // {c: 3, constructor: ƒ.......
-    console.log(Object.prototype); // {c: 3, constructor: ƒ.......
+    // function Test() {
+    //     this.a = 1;
+    // }
+    // Test.prototype.b = 2;
+    // let test = new Test();
+    // Object.prototype.c = 3;
+    // test.a = 1;
+    // console.log(Test.prototype.__proto__ === Object.prototype); // ture
+    // console.log(test.__proto__); // {b: 2, constructor: ƒ}
+    // console.log(Test.prototype); // {b: 2, constructor: ƒ}
+    // console.log(Test.prototype.__proto__); // {c: 3, constructor: ƒ.......
+    // console.log(Object.prototype); // {c: 3, constructor: ƒ.......
 
 
-    // Function Object ： 函数 对象
-    console.log(Test.__proto__ === Function.prototype); // true
-    console.log(Function.__proto__ === Function.prototype); // true
-    console.log(Object.__proto__ === Function.__proto__); // true
+    // // Function Object ： 函数 对象
+    // console.log(Test.__proto__ === Function.prototype); // true
+    // console.log(Function.__proto__ === Function.prototype); // true
+    // console.log(Object.__proto__ === Function.__proto__); // true
+    /**
+     * @param {string} str
+     * @return {number}
+     */
+    var strToInt = function(str) {
+
+        /* 解法二 巧用正则匹配 */
+        const num = str.trim().match(/^[+-]?\d+/)
+        if (!num) return 0
+
+        const min = -(2 ** 31),
+            max = (2 ** 31) - 1
+        return num <= min ? min : num >= max ? max : num
+    };
+    var strToInt = function(str) {
+        /* 
+            解法一 步步为营
+            1、过滤前方空格
+            2、确定正负号
+            3、计算值部分
+            4、得到值 且判断是否越界
+        */
+        if (!str.length) return 0
+
+        let i = 0,
+            sign = 1,
+            total = 0,
+            num // i 当前索引 sign 正负号 total 数字部分
+        const l = str.length,
+            min = -(2 ** 31),
+            max = (2 ** 31) - 1
+
+        // 1、剩余前方空格
+        while (str.charAt(i) === ' ' && i < l) i++
+
+            // 2、确定正负号
+            if (str.charAt(i) === '+' || str.charAt(i) === '-') sign = str.charAt(i++) === '+' ? 1 : -1
+
+            // 3、计算数字部分 
+        while (i < l) {
+            // 遇到字符不在[0-9] 则推出循环
+            if (str.charCodeAt(i) < 48 || str.charCodeAt(i) > 57) break
+
+            // 更新total 巧用 - '0' 隐式转换 [0-9]字符
+            total = 10 * total + (str.charAt(i++) - '0')
+        }
+
+        num = sign * total
+
+        return num <= min ? min : num >= max ? max : num
+
+    };
+
+    let str1 = "   -42"
+    let str2 = "4193 with words"
+    let str3 = "words and 987"
+    let str4 = "-91283472332"
+    let str5 = "+"
+    console.log(strToInt(str5));
+    // strToInt(str2)
 </script>
 
 </html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=\, initial-scale=1.0">
+    <title>渲染几万条数据不卡住页面</title>
+</head>
+
+<body>
+    <!-- 比如：往页面注入10000个li标签 -->
+    <ul id="ul">控件</ul>
+</body>
+<script>
+    // 使用document.createDocumentFragment()插入li节点
+    // let element = document.getElementById('ul');
+    // let fragment = document.createDocumentFragment(); //创建文档片段
+    // let browsers = ['渲染的数据1', '渲染的数据2', '渲染的数据3', '渲染的数据4', '渲染的数据5'];
+    // browsers.forEach(function(browser) {
+    //     var li = document.createElement('li');
+    //     li.textContent = browser;
+    //     fragment.appendChild(li); // 将数据先获取到文档片段种
+    // })
+    // element.appendChild(fragment); //将文档判断插入元素
+
+    // 使用requestAnimationFrame setIntertal和setTimeout来实现定时分批渲染，实现每16ms刷新一次。
+    setTimeout(() => {
+        // 插入十万条数据
+        const total = 10000;
+        // 一次插入20条，如果觉得性能不好就减少
+        const once = 20;
+        // 渲染数据总共需要几次
+        const loopCount = total / once;
+        let countOfRender = 0;
+        let ul = document.querySelector("ul"); // 获取ul
+        function add() {
+            // 优化性能，使用文档片段，插入不会造成回流
+            const fragment = document.createDocumentFragment();
+            for (let i = 0; i < once; i++) {
+                const li = document.createElement("li");
+                li.innerText = Math.floor(Math.random() * total);
+                fragment.appendChild(li);
+            }
+            ul.appendChild(fragment); //将文档片段插入到ul当中
+            countOfRender += 1;
+            loop();
+        }
+
+        function loop() {
+            if (countOfRender < loopCount) {
+                window.requestAnimationFrame(add); // 定时分批渲染
+            }
+        }
+        loop()
+    }, 0)
+</script>
+
+</html>
