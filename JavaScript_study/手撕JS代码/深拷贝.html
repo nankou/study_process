@@ -17,8 +17,66 @@
     function getType(target) {
         return Object.prototype.toString.call(target).slice(8, -1); // [object Array].slice(8,-1) ==> Array
     }
+    // 基本够用版
+    // function cloneUtil(target) {
+    //     let res;
+    //     if (getType(target) === 'Object') {
+    //         res = {};
+    //     } else if (getType(target) === 'Array') {
+    //         res = []
+    //     } else { // 如果是基本数据类型，直接赋值即可
+    //         return target
+    //     }
+    //     // 遍历目标数据
+    //     for (let i in target) {
+    //         // 收集个体数据
+    //         let item = target[i];
+    //         // 拷贝的过程
+    //         // res[i] = item; ====>>  这个是引用地址传递，所以还是浅拷贝
+    //         // 拷贝的数据不能用引用数据类型，如果一旦有引用数据类型继续拆解克隆
+    //         // 也就是递归
+    //         if (getType(item) === 'Object' || 'Array') {
+    //             res[i] = cloneUtil(item)
+    //         } else {
+    //             res[i] = item
+    //         }
 
-    function cloneUtil(target) {
+    //     }
+    //     return res;
+    // }
+    // let obj = {
+    //     name: 'kkkk',
+    //     age: 42,
+    //     sex: {
+    //         option1: '男',
+    //         option2: '女',
+    //         option3: '不男不女'
+    //     }
+    // }
+    // let res = cloneUtil(obj);
+    // res.sex.option1 = '12123123'
+    // console.log(res, obj);
+    // const target = {
+    //     field1: 1,
+    //     field2: undefined,
+    //     field3: {
+    //         child: 'child'
+    //     },
+    //     field4: [2, 4, 8]
+    // };
+    // target.target = target; // 循环引用
+    // console.log(deepClone1(target)); // 递归会进入死循环，导致栈内存溢出
+
+
+
+    // 解决循环引用版本
+    // 为了解决循环引用的问题，可以额外开辟一个储存空间，来存储当前对象和拷贝对象的对应关系，
+    // 当需要拷贝对象时。先去存储空间中找，有没有拷贝过这个对象，如果有的话直接返回，没有的话继续拷贝，这样就巧妙化解循环引用的问题了。
+    // 可以使用weakmap来存储，key - value形式的的数据，且key可以是一个引用类型。
+    // WeakMap对象是一组键值对的组合，其中的键时弱引用，键必须是对象，而值可以是任意的。
+    // 如果使用Map，对象之间是存在强引用关系的，也就是需要手动将对象指向null，才可以被垃圾回收机制回收
+    // 而如果使用WeakMap，弱引用，垃圾回收机制会自动帮我们回收。当拷贝的对象非常庞大的时候，就不会对内存造成非常大的额外消耗。
+    function deepClone1(target, map = new WeakMap()) {
         let res;
         if (getType(target) === 'Object') {
             res = {};
@@ -27,6 +85,11 @@
         } else { // 如果是基本数据类型，直接赋值即可
             return target
         }
+        if (map.get(target)) {
+            return target
+        };
+        map.set(target, res)
+
         // 遍历目标数据
         for (let i in target) {
             // 收集个体数据
@@ -36,7 +99,7 @@
             // 拷贝的数据不能用引用数据类型，如果一旦有引用数据类型继续拆解克隆
             // 也就是递归
             if (getType(item) === 'Object' || 'Array') {
-                res[i] = cloneUtil(item)
+                res[i] = deepClone1(item, map)
             } else {
                 res[i] = item
             }
@@ -44,28 +107,24 @@
         }
         return res;
     }
-    let obj = {
-        name: 'kkkk',
-        age: 42,
-        sex: {
-            option1: '男',
-            option2: '女',
-            option3: '不男不女'
-        }
-    }
-    let res = cloneUtil(obj);
-    res.sex.option1 = '12123123'
-    console.log(res, obj);
+    const target = {
+        field1: 1,
+        field2: undefined,
+        field3: {
+            child: 'child'
+        },
+        field4: [2, 4, 8]
+    };
+    target.target = target; // 循环引用
+    console.log(deepClone1(target)); // 递归会进入死循环，导致栈内存溢出
 
-
-
-    /*深拷贝实现二：JSON互转*/
+    /*深拷贝实现二：JSON互转（乞丐版）*/
     // JSON.parse JOSN.stringfy
     // 先把对象转换成字符串，再转换成新对象，就不存在引用传递的问题
-    function deepClone(obj) {
-        return JSON.parse(JSON.stringify(obj))
-    }
-    console.log(deepClone(obj));
+    // function deepClone(obj) {
+    //     return JSON.parse(JSON.stringify(obj))
+    // }
+    // console.log(deepClone(obj));
 </script>
 
 </html>
