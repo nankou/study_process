@@ -14,10 +14,17 @@
 
 </html>
 <script>
-    function Person() {
-
-    }
-    var person = new Person();
-    person.name = 'nankou';
-    console.log(person.name);
+    var countSegments = function(s) {
+        let str = s.trim();
+        let ans = 0;
+        if (s.length == 0) return 0;
+        for (let i = 0; i < s.length; i++) {
+            if (s[i] == ' ') {
+                ans++;
+            }
+        }
+        return ans + 1;
+    };
+    let s = "Hello, my name is John";
+    console.log(countSegments(s));
 </script>
