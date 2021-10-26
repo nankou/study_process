@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现字符串翻转</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    var reverseString = function(s) {
+        const n = s.length;
+        for (let left = 0, right = n - 1; left < right; ++left, --right) {
+            [s[left], s[right]] = [s[right], s[left]];
+        }
+        return s;
+    };
+    let s = ["h", "e", "l", "l", "o"]
+    console.log(reverseString(s)); //  ['o', 'l', 'l', 'e', 'h']
+</script>
+
+</html>
