@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>实现千位分隔符</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 将普通数字转换成带千位分隔符的数字字符串
+    // 如19351235.235767 => 19,351,235.235767
+
+    // 方法一：将数字转换成字符数组，
+    function numFormat(num) {
+        num = num.toString().split('.'); // 分隔小数点
+        var arr = num[0].split('').reverse(); // 转换字符数组并且倒序排列
+        var res = [];
+        for (let i = 0, len = arr.length; i < len; i++) {
+            if (i % 3 === 0 && i !== 0) {
+                res.push(',')
+            }
+            res.push(arr[i])
+        }
+        res.reverse(); // 再次倒序成为正序
+        if (num[1]) { // 如果有小数部分
+            res = res.join('').concat('.' + num[1]);
+        } else {
+            res = res.join('');
+        }
+        return res;
+    }
+    console.log(numFormat(19351235.235767)); // 19,351,235.235767
+
+    // 方法二：直接使用JS内置函数toLocaleString()
+    // 但是该方法在测试下会根据四舍五入只留下三位小数
+    let num1 = 19351235.235767;
+    console.log(num1.toLocaleString()); //19,351,235.236
+
+    // 方法三：使用正则匹配+replace函数
+    function numFormat2(num) {
+        var res = num.toString().replace(/\d+/, function(n) {
+            return n.replace(/(\d)(?=(\d{3})+$)/g, function($1) {
+                return $1 + ",";
+            })
+        })
+        return res;
+    }
+    console.log(numFormat2(19351235.235767)); // 19,351,235.235767
+</script>
+
+</html>
