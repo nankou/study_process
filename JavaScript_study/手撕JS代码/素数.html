@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>素数</title>
+</head>
+
+<body>
+
+</body>
+<script>
+    // 素数又称质数，在初高中的时候就有学过了。
+    // 约数只有1和它本身的整数称为素数（质数），比如2，3，5，7，11等等
+
+    // 一 、判断一个数是否是素数
+
+    // 1、方法一：直观判断法：直接遍历看是否是num的约数
+    function isPrime(num) {
+        for (let i = 2; i <= num - 1; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 2、方法二：将数进行平方根处理，减少遍历次数，提高性能
+    function isPrime2(num) {
+        let temp = Math.sqrt(num);
+        for (let i = 2; i <= temp; i++) {
+            if (num % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // 3、方法三：更快速的判断方法：大于等于5的质数一定和6的倍数相邻
+    function isPrime3(num) {
+        // 两个较小数另外处理
+        if (num == 2 || num == 3) {
+            return true;
+        }
+        // 不在6的倍数两侧的一定不是质数
+        if (num % 6 != 1 && num % 6 !== 5) {
+            return false;
+        }
+        let temp = Math.sqrt(num);
+        // 在6的倍数两侧的也可能不是质数
+        for (let i = 5; i <= temp; i += 6) {
+            if (num % i == 0 || num % (i + 2) == 0) {
+                return false;
+            }
+        }
+        // 排除所有，剩余的是质数
+        return true;
+    }
+
+
+    // 二 、获取n以内所有的素数
+    var countPrimes = function(n) {
+        const isPrime = new Array(n).fill(1);
+        let ans = 0;
+        for (let i = 2; i < n; ++i) {
+            if (isPrime[i]) {
+                ans += 1;
+                for (let j = i * i; j < n; j += i) {
+                    isPrime[j] = 0;
+                }
+            }
+        }
+        return ans;
+    };
+</script>
+
+</html>

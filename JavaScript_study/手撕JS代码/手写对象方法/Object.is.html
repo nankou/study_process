@@ -21,6 +21,28 @@
             return x !== x && y !== y
         }
     }
+
+    let objectA = {
+        name: '1',
+        age: 12
+    };
+    let objectB = {
+        name: '1',
+        age: 12
+    }
+    let objectC = objectA
+    console.log(Object.is(undefined, undefined)); // true
+    console.log(Object.is(null, null)); // true
+    console.log(Object.is(true, true)); // true
+    console.log(Object.is(true, false)); // false
+    console.log(Object.is('str', 'str')); // true
+    console.log(Object.is(objectA, objectB)); // false
+    console.log(Object.is(objectA, objectC)); // true
+    console.log(+0 === -0); // true
+    console.log(Object.is(+0, -0)); // false
+    console.log(Object.is(0, 0)); // true
+    console.log(NaN === NaN); // false
+    console.log(Object.is(NaN, NaN)); // true
 </script>
 
 </html>

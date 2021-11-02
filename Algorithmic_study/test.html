@@ -12,39 +12,34 @@
 
 </body>
 <script>
-    const findDuplicate = (nums) => {
-        let len = nums.length;
-        let left = 1;
-        let right = len - 1;
-        while (left < right) {
-            let mid = left + (right - left) / 2;
-
-            let cnt = 0;
-            for (let i = 0; i < nums.length; i++) {
-                if (nums[i] <= mid) {
-                    cnt += 1;
-                }
-            }
-
-            // 根据抽屉原理，小于等于 4 的个数如果严格大于 4 个，此时重复元素一定出现在 [1..4] 区间里
-            if (cnt > mid) {
-                // 重复元素位于区间 [left..mid]
-                right = mid;
-            } else {
-                // if 分析正确了以后，else 搜索的区间就是 if 的反面区间 [mid + 1..right]
-                left = mid + 1;
-            }
+    var isValid = function(s) {
+        if (s.length <= 1) {
+            return false
         }
-        return left;
-    }
+        if (s.length % 2 === 1) {
+            return false
+        }
+        let stack = [];
+        const pairs = new Map([
+            [')', '('],
+            [']', '['],
+            ['}', '{']
+        ])
+        for (let i = 0; i < s.length; i++) {
+            if (pairs.has(s[i])) {
+                if (!stack.length || stack[stack.length - 1] !== pairs.get(s[i])) {
+                    return false;
+                }
+                stack.pop()
+            } else {
+                stack.push(s[i])
+            }
 
-
-
-
-
-    let num = 10;
-
-    console.log(num.toString().split('').reverse());
+        }
+        return !stack.length;
+    };
+    let s = "()[]{}";
+    console.log(isValid(s));
 </script>
 
-</html>o
+</html>
